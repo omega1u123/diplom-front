@@ -7,11 +7,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src*"],
+      "@*": ["src*"],
       "@store/*": ["src/store/*"],
       "@utils/*": ["src/utils/*"],
       "@types/*": ["src/types/*"],
-      "@assets/*": ["src/assets/*"]
+      "@api/*": ["src/API/*"],
+      "@assets": ["src/assets/index"],
+      "@hooks/*": ["src/hooks/*"],
     }
   }
 }
