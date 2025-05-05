@@ -26,7 +26,7 @@ export const authApi = createApi({
     }),
     register: builder.mutation<void, RegisterForm>({
       query: (credentials) => ({
-        url: `${BASE_URL}${API_ROUTES.AUTH.LOGIN}`,
+        url: `${BASE_URL}${API_ROUTES.AUTH.REGISTER}`,
         method: "POST",
         body: credentials,
       }),
