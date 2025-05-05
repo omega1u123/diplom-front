@@ -3,7 +3,7 @@ export const BASE_URL = import.meta.env.VITE_BASE_URL || "";
 export const API_ROUTES = {
   AUTH: {
     LOGIN: "/api/Auth/login",
-    REGISTER: "api/Auth/register",
+    REGISTER: "/api/Auth/register",
     REFRESH_TOKEN: "/api/Auth/refresh-token",
   },
 };

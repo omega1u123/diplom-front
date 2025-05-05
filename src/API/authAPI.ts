@@ -3,7 +3,7 @@ import { API_ROUTES } from "../utils/routesNames";
 import { baseQuery } from "@/API/baseQuery";
 import { LoginForm, RegisterForm } from "@/types/authTypes";
 
-export const BASE_URL = import.meta.env.VITE_ZORKI_BASE_URL || "/api";
+export const BASE_URL = import.meta.env.VITE_BASE_URL || "/api";
 
 export interface AuthResponse {
   accessToken: string;

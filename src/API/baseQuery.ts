@@ -1,10 +1,16 @@
 import { BaseQueryFn } from "@reduxjs/toolkit/query";
 import { FetchResponse } from "ofetch";
 import { toast } from "react-toastify";
-import store from "../store/store";
 import { ErrorMessages } from "@/utils/formMessages";
 import client from "@/services/client";
 import { clearAuthState } from "@/store/slices/authSlice";
+import { Action } from "@reduxjs/toolkit";
+
+let injectedDispatch: ((action: Action) => void) | null = null;
+
+export const injectStore = (dispatch: (action: Action) => void) => {
+  injectedDispatch = dispatch;
+};
 
 type BaseQueryArgs =
   | string
@@ -61,7 +67,9 @@ export const baseQuery: BaseQueryFn<BaseQueryArgs, unknown, unknown> = async <
         ErrorMessages.ERROR_UNKNOWN;
 
       if (status === 401 || errorMessage === "Неверный токен обновления") {
-        store.dispatch(clearAuthState());
+        if (injectedDispatch) {
+          injectedDispatch(clearAuthState());
+        }
       }
 
       toast.error(errorMessage);

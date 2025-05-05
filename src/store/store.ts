@@ -1,6 +1,7 @@
 import { authApi } from "@/API/authAPI";
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
+import { injectStore } from "@/API/baseQuery";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,8 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(authApi.middleware),
 });
+
+injectStore(store.dispatch);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
