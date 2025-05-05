@@ -6,3 +6,9 @@ export const API_ROUTES = {
     REFRESH_TOKEN: "/api/refresh-token",
   },
 };
+
+export const routesNames = {
+  authLogin: "login",
+  authRegister: "register",
+  recipesPath: "/recipes",
+};
