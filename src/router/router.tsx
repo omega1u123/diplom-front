@@ -9,6 +9,8 @@ import { routesNames } from "@/utils/routesNames";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import PostsPage from "./../pages/main/Posts/PostsPage";
 import RatingPage from "@/pages/main/Rating/RatingPage";
+import CreateRecipePage from "@/pages/main/Recipes/createRecipe/CreateRecipePage";
+import ShowRecipesPage from "@/pages/main/Recipes/showRecipes/ShowRecipesPage";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,16 @@ const router = createBrowserRouter([
       {
         path: routesNames.recipesPath,
         element: <RecipesPage />,
+        children: [
+          {
+            index: true,
+            element: <ShowRecipesPage />,
+          },
+          {
+            path: "create",
+            element: <CreateRecipePage />,
+          },
+        ],
       },
       {
         path: routesNames.postsPath,

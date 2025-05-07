@@ -8,7 +8,7 @@ const NavArray = [
 ];
 const Header = () => {
   return (
-    <div className="flex justify-between items-center px-11 h-20 w-full bg-blue-700">
+    <div className="flex justify-between items-center px-11 py-3 w-full bg-blue-700">
       <nav className="flex justify-center items-center gap-6">
         {NavArray.map((nav, index) => (
           <NavButton key={index} text={nav.text} path={nav.path} />

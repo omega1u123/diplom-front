@@ -1,5 +1,10 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 export default function RecipesPage() {
-  return <div>RecipesPage</div>;
+  return (
+    <div className="flex justify-center items-center">
+      <Outlet />
+    </div>
+  );
 }
