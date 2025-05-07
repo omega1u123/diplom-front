@@ -11,5 +11,8 @@ export const API_ROUTES = {
 export const routesNames = {
   authLogin: "login",
   authRegister: "register",
-  recipesPath: "/recipes",
+  recipesPath: "recipes",
+  postsPath: "posts",
+  ratingPath: "rating",
+  profilePath: "profile",
 };

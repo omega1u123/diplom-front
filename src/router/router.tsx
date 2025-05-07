@@ -1,12 +1,36 @@
+import { ProtectedRoute } from "@/components/protectedRoute";
 import AuthPage from "@/pages/auth/AuthPage";
 import LoginForm from "@/pages/auth/components/LoginForm";
 import RegisterForm from "@/pages/auth/components/RegisterForm";
+import MainPage from "@/pages/main/MainPage";
+import RecipesPage from "@/pages/main/Recipes/RecipesPage";
+import NotFoundPage from "@/pages/not-found/NotFoundPage";
 import { routesNames } from "@/utils/routesNames";
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import PostsPage from "./../pages/main/Posts/PostsPage";
+import RatingPage from "@/pages/main/Rating/RatingPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <MainPage />,
+    children: [
+      {
+        path: routesNames.recipesPath,
+        element: <RecipesPage />,
+      },
+      {
+        path: routesNames.postsPath,
+        element: <PostsPage />,
+      },
+      {
+        path: routesNames.ratingPath,
+        element: <RatingPage />,
+      },
+    ],
+  },
+  {
+    path: "",
     children: [
       {
         path: "auth",
@@ -16,7 +40,21 @@ const router = createBrowserRouter([
           { path: routesNames.authRegister, element: <RegisterForm /> },
         ],
       },
+      {
+        path: "",
+        element: <ProtectedRoute />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/recipes" replace />,
+          },
+        ],
+      },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 export default router;
