@@ -6,7 +6,7 @@ export const ProtectedRoute: React.FC = () => {
   const isAuth = useAppSelector((state) => state.auth.isAuth);
 
   if (!isAuth) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/auth/login" />;
   }
 
   return <Outlet />;

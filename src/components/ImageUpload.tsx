@@ -26,13 +26,13 @@ export const ImageUpload = ({ onImageSelect, preview }: ImageUploadProps) => {
   };
 
   return (
-    <div className="flex justify-center items-center w-[767px] h-[628px] relative">
+    <div className="flex justify-center items-center w-full h-full relative">
       <input
         id="image-upload"
         type="file"
         accept="image/*"
         onChange={handleImageChange}
-        className="w-[767px] h-[628px] cursor-pointer absolute z-30 opacity-0"
+        className="w-full h-full cursor-pointer absolute z-30 opacity-0"
       />
       <label
         htmlFor="image-upload"

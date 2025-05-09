@@ -4,6 +4,7 @@ export const API_ROUTES = {
   AUTH: {
     LOGIN: "/api/Auth/login",
     REGISTER: "/api/Auth/register",
+    GET_INFO: "/api/User/currentUser",
     REFRESH_TOKEN: "/api/Auth/refresh-token",
   },
 };

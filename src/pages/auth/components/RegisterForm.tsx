@@ -7,7 +7,11 @@ const RegisterForm = () => {
   const [register] = useRegisterMutation();
   const submit = async (data: IFormValues) => {
     const { login, password } = data;
-    await register({ name: login, password });
+    try {
+      await register({ name: login, password }).unwrap();
+    } catch {
+      return;
+    }
     navigate("/auth/login");
   };
   return (

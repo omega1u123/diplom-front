@@ -1,12 +1,15 @@
 import { useAuth } from "@/hooks/useAuth";
 import AuthForm, { IFormValues } from "@/pages/auth/components/AuthForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const { auth } = useAuth();
+
   const submit = (data: IFormValues) => {
     const { login, password } = data;
     auth({ userName: login, password });
+    navigate("/recipes");
   };
   return (
     <div className="flex flex-col justify-center items-center w-3xl h-[28rem] gap-10 bg-white border-[1px] border-gray-400 rounded-[12px]">

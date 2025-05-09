@@ -14,34 +14,6 @@ import ShowRecipesPage from "@/pages/main/Recipes/showRecipes/ShowRecipesPage";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <MainPage />,
-    children: [
-      {
-        path: routesNames.recipesPath,
-        element: <RecipesPage />,
-        children: [
-          {
-            index: true,
-            element: <ShowRecipesPage />,
-          },
-          {
-            path: "create",
-            element: <CreateRecipePage />,
-          },
-        ],
-      },
-      {
-        path: routesNames.postsPath,
-        element: <PostsPage />,
-      },
-      {
-        path: routesNames.ratingPath,
-        element: <RatingPage />,
-      },
-    ],
-  },
-  {
     path: "",
     children: [
       {
@@ -59,6 +31,34 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Navigate to="/recipes" replace />,
+          },
+          {
+            path: "/",
+            element: <MainPage />,
+            children: [
+              {
+                path: routesNames.recipesPath,
+                element: <RecipesPage />,
+                children: [
+                  {
+                    index: true,
+                    element: <ShowRecipesPage />,
+                  },
+                  {
+                    path: "create",
+                    element: <CreateRecipePage />,
+                  },
+                ],
+              },
+              {
+                path: routesNames.postsPath,
+                element: <PostsPage />,
+              },
+              {
+                path: routesNames.ratingPath,
+                element: <RatingPage />,
+              },
+            ],
           },
         ],
       },
