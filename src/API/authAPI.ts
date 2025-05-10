@@ -1,10 +1,8 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
-import { API_ROUTES } from "../utils/routesNames";
+import { API_ROUTES, BASE_URL } from "../utils/routesNames";
 import { baseQuery } from "@/API/baseQuery";
 import { LoginForm, RegisterForm } from "@/types/authTypes";
 import { User } from "@/types/userTypes";
-
-export const BASE_URL = import.meta.env.VITE_BASE_URL || "/api";
 
 export interface AuthResponse {
   id: string;

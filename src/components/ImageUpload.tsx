@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 
 interface ImageUploadProps {
   onImageSelect: (file: File | null, previewUrl: string | null) => void;
@@ -6,8 +6,8 @@ interface ImageUploadProps {
 }
 
 export const ImageUpload = ({ onImageSelect, preview }: ImageUploadProps) => {
-  const [file, setFile] = useState<File | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  // const [file, setFile] = useState<File | null>(null);
+  // const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -15,12 +15,12 @@ export const ImageUpload = ({ onImageSelect, preview }: ImageUploadProps) => {
       const selectedFile = files[0];
       const imageUrl = URL.createObjectURL(selectedFile);
 
-      setFile(selectedFile);
-      setPreviewUrl(imageUrl);
+      // setFile(selectedFile);
+      // setPreviewUrl(imageUrl);
       onImageSelect(selectedFile, imageUrl);
     } else {
-      setFile(null);
-      setPreviewUrl(null);
+      // setFile(null);
+      // setPreviewUrl(null);
       onImageSelect(null, null);
     }
   };
@@ -45,7 +45,7 @@ export const ImageUpload = ({ onImageSelect, preview }: ImageUploadProps) => {
             className="object-cover w-full h-full"
           />
         ) : (
-          <p className="text-gray-500">Click or drop image here</p>
+          <p className="text-gray-500">Нажмите или закиньте фотографию</p>
         )}
       </label>
     </div>

@@ -9,7 +9,7 @@ interface SelectInputProps<T extends FieldValues> {
   name?: Path<T>;
   register?: UseFormRegister<T>;
   validation?: RegisterOptions<T, Path<T>>;
-  options: { label: string }[];
+  options: { id: string; name: string }[];
   label: string;
   width?: string;
   height?: string;
@@ -41,8 +41,10 @@ export const SelectInput = <T extends FieldValues>({
         className={`flex justify-start px-1 border-[1px] border-[#D9D9D9] rounded-[${rounded}px]`}
         style={{ width: `${width}px`, height: `${height}px` }}
       >
-        {options.map((option, index) => (
-          <option key={index}>{option.label}</option>
+        {options.map((option) => (
+          <option key={option.id} value={option.id}>
+            {option.name}
+          </option>
         ))}
       </select>
     </div>
