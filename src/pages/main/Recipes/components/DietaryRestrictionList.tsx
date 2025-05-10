@@ -49,6 +49,9 @@ export const DietaryRestrictionList = ({
                 value={selectedId}
                 onChange={(e) => setSelectedId(e.target.value)}
               >
+                <option key="none" value="">
+                  Выберите опцию
+                </option>
                 {restrictions
                   .filter(
                     (restriction) =>

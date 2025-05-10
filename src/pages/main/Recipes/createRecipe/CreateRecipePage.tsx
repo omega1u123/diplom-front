@@ -5,6 +5,7 @@ import { ImageUpload } from "@/components/ImageUpload";
 import { Input } from "@/components/Input";
 import { SelectInput } from "@/components/SelectInput";
 import { Textarea } from "@/components/Textarea";
+import { useAppSelector } from "@/hooks/reduxHooks";
 import { DietaryRestrictionList } from "@/pages/main/Recipes/components/DietaryRestrictionList";
 import { IngredientList } from "@/pages/main/Recipes/components/IngredientList";
 import { RecipeStepList } from "@/pages/main/Recipes/components/RecipeStepList";
@@ -18,6 +19,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function CreateRecipePage() {
+  const userId = useAppSelector((state) => state.auth.userId);
   const [image, setImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
@@ -37,40 +39,39 @@ export default function CreateRecipePage() {
   };
   const { register, handleSubmit } = useForm<RecipeForm>();
   const handleSubmitButton = async (data: RecipeForm) => {
-    // const {
-    //   name,
-    //   complexity,
-    //   cuisineId,
-    //   cookingTime,
-    //   proteins,
-    //   fats,
-    //   carb,
-    //   calories,
-    //   description,
-    // } = data;
     const ingredientsId = ingredients?.map((x) => x.id) ?? [];
     const recipeStepsId = recipeSteps?.map((x) => x.id) ?? [];
     const dietaryRestrictionId = dietaryRestriction?.map((x) => x.id) ?? [];
-
+    console.log(image, image?.type);
     if (!image) return;
     let fileUrl = "";
     try {
       fileUrl = await fetchMedia(image).unwrap();
+      console.log(fileUrl);
     } catch {
       return;
     }
 
     try {
-      await create({
+      const Recipe = await create({
         ...data,
+        cookingTime: Number(data.cookingTime),
+        complexity: Number(data.complexity),
+        proteins: Number(data.proteins),
+        fats: Number(data.fats),
+        carb: Number(data.carb),
+        calories: Number(data.calories),
+        userId,
         ingredientIdList: ingredientsId,
         recipeStepIdList: recipeStepsId,
         dietaryRestrictionIdList: dietaryRestrictionId,
         fileUrl,
       });
+      console.log(Recipe);
     } catch {
       return;
     }
+    console.log("nice");
   };
 
   return (
@@ -87,7 +88,7 @@ export default function CreateRecipePage() {
               preview={previewUrl}
             />
           </div>
-          <div className="flex flex-col justify-start items-start py-8 px-14 w-[470px] h-[628px] gap-6 rounded-[12px] bg-gray-200">
+          <div className="flex flex-col justify-start items-start py-8 px-14 w-[470px] min-h-[628px] gap-6 rounded-[12px] bg-gray-200">
             <Input<RecipeForm>
               name="name"
               register={register}

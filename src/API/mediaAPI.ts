@@ -7,17 +7,11 @@ export const mediaApi = createApi({
   baseQuery,
   endpoints: (builder) => ({
     fetchMedia: builder.mutation<string, File>({
-      query: (file) => {
-        const formData = new FormData();
-        formData.append("file", file); // Use a field name expected by your backend (e.g., "file")
-
-        return {
-          url: `${BASE_URL}${API_ROUTES.MEDIA.BASE}`,
-          method: "POST",
-          body: formData,
-          // No manual Content-Type header needed
-        };
-      },
+      query: (file) => ({
+        url: `${BASE_URL}${API_ROUTES.MEDIA.BASE}?mimetype=${file.type}`,
+        method: "POST",
+        body: file,
+      }),
     }),
   }),
 });

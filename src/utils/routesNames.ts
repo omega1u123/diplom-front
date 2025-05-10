@@ -7,8 +7,14 @@ export const API_ROUTES = {
     GET_INFO: "/api/User/currentUser",
     REFRESH_TOKEN: "/api/Auth/refresh-token",
   },
+  USER: {
+    RATING: "/api/User/ratings",
+  },
   INGREDIENT: {
     BASE: "/api/Ingredient",
+  },
+  RECIPE: {
+    BASE: "/api/recipe",
   },
   RECIPE_STEP: {
     BASE: "/api/RecipeStep",
@@ -20,7 +26,7 @@ export const API_ROUTES = {
     BASE: "/api/Cuisine",
   },
   MEDIA: {
-    BASE: "/api/recipe/media",
+    BASE: "/api/file",
   },
 };
 

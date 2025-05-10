@@ -7,6 +7,7 @@ import {
 
 interface InputProps<T extends FieldValues> {
   name?: Path<T>;
+  inputType?: string;
   register?: UseFormRegister<T>;
   validation?: RegisterOptions<T, Path<T>>;
   label?: string;
@@ -21,6 +22,7 @@ export const Input = <T extends FieldValues>({
   name,
   register,
   validation,
+  inputType = "text",
   label,
   placeholder,
   width = "339",
@@ -37,7 +39,7 @@ export const Input = <T extends FieldValues>({
         {label}
       </p>
       <input
-        type="text"
+        type={inputType}
         placeholder={placeholder}
         {...(register && name ? register(name, validation) : {})}
         className={`flex justify-start px-1 border-[1px] border-[#D9D9D9] rounded-[${rounded}px] placeholder:text-sm placeholder:text-gray-400`}

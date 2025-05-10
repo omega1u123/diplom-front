@@ -8,6 +8,7 @@ import { dietaryRestrictionApi } from "@/API/dietaryRestrictionAPI";
 import { recipeApi } from "@/API/recipeAPI";
 import { mediaApi } from "@/API/mediaAPI";
 import { cuisineApi } from "@/API/cuisineAPI";
+import { userApi } from "@/API/userAPI";
 
 const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
     [recipeApi.reducerPath]: recipeApi.reducer,
     [mediaApi.reducerPath]: mediaApi.reducer,
     [cuisineApi.reducerPath]: cuisineApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -28,7 +30,8 @@ const store = configureStore({
       .concat(dietaryRestrictionApi.middleware)
       .concat(recipeApi.middleware)
       .concat(mediaApi.middleware)
-      .concat(cuisineApi.middleware),
+      .concat(cuisineApi.middleware)
+      .concat(userApi.middleware),
 });
 
 injectStore(store.dispatch);

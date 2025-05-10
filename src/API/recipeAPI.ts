@@ -10,7 +10,7 @@ export const recipeApi = createApi({
   endpoints: (builder) => ({
     createRecipe: builder.mutation<Recipe, RecipeForm>({
       query: (data) => ({
-        url: `${BASE_URL}${API_ROUTES.RECIPE_STEP.BASE}`,
+        url: `${BASE_URL}${API_ROUTES.RECIPE.BASE}`,
         method: "POST",
         body: data,
       }),

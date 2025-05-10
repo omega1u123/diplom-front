@@ -11,6 +11,7 @@ import PostsPage from "./../pages/main/Posts/PostsPage";
 import RatingPage from "@/pages/main/Rating/RatingPage";
 import CreateRecipePage from "@/pages/main/Recipes/createRecipe/CreateRecipePage";
 import ShowRecipesPage from "@/pages/main/Recipes/showRecipes/ShowRecipesPage";
+import ShowRatingPage from "@/pages/main/Rating/showRating/ShowRatingPage";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,12 @@ const router = createBrowserRouter([
               {
                 path: routesNames.ratingPath,
                 element: <RatingPage />,
+                children: [
+                  {
+                    index: true,
+                    element: <ShowRatingPage />,
+                  },
+                ],
               },
             ],
           },
