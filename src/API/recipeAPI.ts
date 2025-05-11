@@ -22,7 +22,17 @@ export const recipeApi = createApi({
         body: data,
       }),
     }),
+    getRecipeById: builder.query<Recipe, string>({
+      query: (id) => ({
+        url: `${BASE_URL}${API_ROUTES.RECIPE.BASE}/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateRecipeMutation, useFilterRecipeQuery } = recipeApi;
+export const {
+  useCreateRecipeMutation,
+  useFilterRecipeQuery,
+  useGetRecipeByIdQuery,
+} = recipeApi;

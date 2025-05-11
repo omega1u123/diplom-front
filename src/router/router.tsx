@@ -12,6 +12,7 @@ import RatingPage from "@/pages/main/Rating/RatingPage";
 import CreateRecipePage from "@/pages/main/Recipes/createRecipe/CreateRecipePage";
 import ShowRecipesPage from "@/pages/main/Recipes/showRecipes/ShowRecipesPage";
 import ShowRatingPage from "@/pages/main/Rating/showRating/ShowRatingPage";
+import RecipePage from "@/pages/main/Recipes/recipePage.tsx/RecipePage";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
                   {
                     path: "create",
                     element: <CreateRecipePage />,
+                  },
+                  {
+                    path: ":id",
+                    element: <RecipePage />,
                   },
                 ],
               },

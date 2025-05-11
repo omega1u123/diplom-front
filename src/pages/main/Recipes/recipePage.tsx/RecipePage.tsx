@@ -1,7 +1,77 @@
-import { useGetRecipe } from "@/hooks/useGetRecipe";
+import { useGetRecipeByIdQuery } from "@/API/recipeAPI";
+import { useParams } from "react-router-dom";
 
 export default function RecipePage() {
-  const id = "";
-  const recipe = useGetRecipe({ id });
-  return <div>RecipePage</div>;
+  const { id } = useParams();
+  const { data } = useGetRecipeByIdQuery(id!);
+  return (
+    <section className="flex flex-col justify-center items-center h-full w-full gap-[34px] py-10">
+      <div className="flex flex-col justify-center items-center h-full w-full gap-[34px]">
+        <div className="flex justify-center gap-[34px]">
+          <div className="flex justify-center items-center w-[767px] h-[628px] bg-gray-300">
+            <img
+              src={data?.fileUrl}
+              alt=""
+              className="object-cover w-full h-full"
+            />
+          </div>
+          <div className="flex flex-col justify-between items-start py-8 px-14 w-[470px] min-h-[628px] gap-6 rounded-[12px] bg-gray-200">
+            <div className="flex gap-10">
+              <div className="flex flex-col gap-3 text-xl font-normal text-black">
+                <p>Название: {data?.name}</p>
+                <p>Автор: {data?.user.name}</p>
+                <p>Сложность: {data?.complexity}</p>
+                <p>Рейтинг: {data?.averageRating}</p>
+                <div className="flex flex-wrap gap-2">
+                  <p>Диетические ограничения: </p>
+                  {data?.dietaryRestrictionList.map((x) => (
+                    <p key={x.id}>{x.name}</p>
+                  ))}
+                </div>
+
+                <p>Тип кухни: {data?.cuisine.name}</p>
+                <p>Время приготовления: {data?.cookingTime} мин</p>
+                <div className="flex flex-wrap gap-3">
+                  <p>Белки: {data?.proteins} гр</p>
+                  <p>Жиры: {data?.fats} гр</p>
+                  <p>Углеводы: {data?.carb} гр</p>
+                  <p>Калории: {data?.calories} ккал</p>
+                </div>
+              </div>
+            </div>
+            <button
+              type="submit"
+              form="recipe-form"
+              className="flex justify-center items-center w-36 h-9 rounded-xl bg-[#C9DCFF] text-xl font-normal text-black cursor-pointer hover:bg-[#B0CFFF]"
+            >
+              Сохранить
+            </button>
+          </div>
+        </div>
+        <div className="flex flex-col gap-2 justify-start items-start w-[1272px] min-h-[467px] py-3 px-4 rounded-[12px] bg-gray-200">
+          <p className="w-[1236px] h-[150px] text-xl font-normal text-black">
+            {data?.description}
+          </p>
+          <div>
+            <h2 className="text-2xl font-normal text-black">Ингредиенты:</h2>
+            {data?.ingredientList.map((x, index) => (
+              <p className="text-xl font-normal text-black">
+                {index + 1}. {x.name}, {x.quantity}
+              </p>
+            ))}
+          </div>
+          <div>
+            <h2 className="text-2xl font-normal text-black">Шаги:</h2>
+            {data?.recipeStepList
+              .sort((a, b) => a.stepNumber - b.stepNumber)
+              .map((x) => (
+                <p className="text-xl font-normal text-black">
+                  {x.stepNumber}. {x.description}
+                </p>
+              ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }

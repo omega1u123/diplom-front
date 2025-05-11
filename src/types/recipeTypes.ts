@@ -32,6 +32,7 @@ export interface Recipe {
   proteins: number;
   fats: number;
   carb: number;
+  calories: number;
   dietaryRestrictionList: DietaryRestriction[];
   averageRating: number;
   description: string;
