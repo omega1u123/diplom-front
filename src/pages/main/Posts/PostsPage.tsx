@@ -1,5 +1,9 @@
-import React from "react";
+import { Outlet } from "react-router-dom";
 
 export default function PostsPage() {
-  return <div>PostsPage</div>;
+  return (
+    <div className="flex justify-center items-center">
+      <Outlet />
+    </div>
+  );
 }

@@ -10,6 +10,7 @@ import { recipeApi } from "@/API/recipeAPI";
 import { mediaApi } from "@/API/mediaAPI";
 import { cuisineApi } from "@/API/cuisineAPI";
 import { userApi } from "@/API/userAPI";
+import { postApi } from "@/API/postAPI";
 
 const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ const store = configureStore({
     [mediaApi.reducerPath]: mediaApi.reducer,
     [cuisineApi.reducerPath]: cuisineApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [postApi.reducerPath]: postApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -33,7 +35,8 @@ const store = configureStore({
       .concat(recipeApi.middleware)
       .concat(mediaApi.middleware)
       .concat(cuisineApi.middleware)
-      .concat(userApi.middleware),
+      .concat(userApi.middleware)
+      .concat(postApi.middleware),
 });
 
 injectStore(store.dispatch);

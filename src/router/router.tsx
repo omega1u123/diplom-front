@@ -13,6 +13,7 @@ import CreateRecipePage from "@/pages/main/Recipes/createRecipe/CreateRecipePage
 import ShowRecipesPage from "@/pages/main/Recipes/showRecipes/ShowRecipesPage";
 import ShowRatingPage from "@/pages/main/Rating/showRating/ShowRatingPage";
 import RecipePage from "@/pages/main/Recipes/recipePage.tsx/RecipePage";
+import ShowPostPage from "@/pages/main/Posts/showPost/ShowPostPage";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,12 @@ const router = createBrowserRouter([
               {
                 path: routesNames.postsPath,
                 element: <PostsPage />,
+                children: [
+                  {
+                    index: true,
+                    element: <ShowPostPage />,
+                  },
+                ],
               },
               {
                 path: routesNames.ratingPath,

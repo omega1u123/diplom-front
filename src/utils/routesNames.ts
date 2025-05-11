@@ -14,6 +14,9 @@ export const API_ROUTES = {
     BASE: "/api/Ingredient",
     BY_NAME: "/api/Ingredient/byName",
   },
+  POST: {
+    BASE: "/api/Post",
+  },
   RECIPE: {
     BASE: "/api/recipe",
     FILTER: "/api/recipe/filter",
