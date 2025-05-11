@@ -15,6 +15,13 @@ export const commentApi = createApi({
       }),
       providesTags: ["Comments"],
     }),
+    getRecipeComments: builder.query<Comment[], { recipeId: string }>({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.COMMENT.BASE}/recipe/${data.recipeId}`,
+        method: "GET",
+      }),
+      providesTags: ["Comments"],
+    }),
     postComment: builder.mutation<Comment, CommentForm>({
       query: (data) => ({
         url: `${BASE_URL}${API_ROUTES.COMMENT.BASE}`,
@@ -26,4 +33,8 @@ export const commentApi = createApi({
   }),
 });
 
-export const { useGetPostCommentsQuery, usePostCommentMutation } = commentApi;
+export const {
+  useGetPostCommentsQuery,
+  useGetRecipeCommentsQuery,
+  usePostCommentMutation,
+} = commentApi;
