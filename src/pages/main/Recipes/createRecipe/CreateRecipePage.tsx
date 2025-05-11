@@ -15,6 +15,7 @@ import {
   RecipeForm,
   RecipeStep,
 } from "@/types/recipeTypes";
+import { uploadFileToMinio } from "@/utils/uploadToMinio";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -47,6 +48,7 @@ export default function CreateRecipePage() {
     let fileUrl = "";
     try {
       fileUrl = await fetchMedia(image).unwrap();
+      await uploadFileToMinio(image, fileUrl);
       console.log(fileUrl);
     } catch {
       return;

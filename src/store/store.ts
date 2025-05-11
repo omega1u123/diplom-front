@@ -1,6 +1,7 @@
 import { authApi } from "@/API/authAPI";
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
+import recipeReducer from "./slices/recipeSlice";
 import { injectStore } from "@/API/baseQuery";
 import { ingredientApi } from "@/API/ingredientAPI";
 import { recipeStepApi } from "@/API/recipeStepAPI";
@@ -13,6 +14,7 @@ import { userApi } from "@/API/userAPI";
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    recipe: recipeReducer,
     [authApi.reducerPath]: authApi.reducer,
     [ingredientApi.reducerPath]: ingredientApi.reducer,
     [recipeStepApi.reducerPath]: recipeStepApi.reducer,

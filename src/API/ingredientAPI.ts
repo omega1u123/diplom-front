@@ -15,7 +15,23 @@ export const ingredientApi = createApi({
         body: data,
       }),
     }),
+    getIngredients: builder.query<Ingredient[], void>({
+      query: () => ({
+        url: `${BASE_URL}${API_ROUTES.INGREDIENT.BASE}`,
+        method: "GET",
+      }),
+    }),
+    getIngredientByName: builder.query<Ingredient, string>({
+      query: (name) => ({
+        url: `${BASE_URL}${API_ROUTES.INGREDIENT.BY_NAME}?name=${name}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useCreateIngredientMutation } = ingredientApi;
+export const {
+  useCreateIngredientMutation,
+  useGetIngredientsQuery,
+  useGetIngredientByNameQuery,
+} = ingredientApi;

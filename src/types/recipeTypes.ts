@@ -1,9 +1,24 @@
 import { User } from "@/types/userTypes";
 
-export enum Complexity {
+export enum ComplexityEnum {
   Easy = "0",
   Medium = "1",
   Hard = "2",
+}
+
+export interface Complexity {
+  id: string;
+  name: string;
+  value: number;
+}
+
+export interface IRecipeFilter {
+  dietaryRestrictionList: string[] | null | undefined;
+  ingredientList: string[] | null | undefined;
+  cuisine: string | null | undefined;
+  complexity: number | undefined;
+  page: number;
+  pageSize: number;
 }
 
 export interface Recipe {
@@ -11,16 +26,17 @@ export interface Recipe {
   name: string;
   cuisine: Cuisine;
   cookingTime: number;
-  complexity: Complexity;
+  complexity: ComplexityEnum;
   ingredientList: Ingredient[];
   recipeStepList: RecipeStep[];
   proteins: number;
   fats: number;
   carb: number;
-  dietaryRestrictionList: string[];
+  dietaryRestrictionList: DietaryRestriction[];
+  averageRating: number;
   description: string;
   user: User;
-  fileUrl: string | null;
+  fileUrl: string;
 }
 
 export interface RecipeForm {

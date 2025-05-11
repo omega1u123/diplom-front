@@ -20,7 +20,7 @@ export default function ShowRatingPage() {
             key={user.userId}
             className="flex justify-between items-start gap-8"
           >
-            <div>{index + 1}</div>
+            <div className="text-2xl font-normal text-black">{index + 1}.</div>
             <UserRatingCard user={user} />
           </div>
         ))}

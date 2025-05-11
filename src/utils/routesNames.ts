@@ -5,16 +5,18 @@ export const API_ROUTES = {
     LOGIN: "/api/Auth/login",
     REGISTER: "/api/Auth/register",
     GET_INFO: "/api/User/currentUser",
-    REFRESH_TOKEN: "/api/Auth/refresh-token",
+    REFRESH_TOKEN: "/api/Auth/refresh",
   },
   USER: {
     RATING: "/api/User/ratings",
   },
   INGREDIENT: {
     BASE: "/api/Ingredient",
+    BY_NAME: "/api/Ingredient/byName",
   },
   RECIPE: {
     BASE: "/api/recipe",
+    FILTER: "/api/recipe/filter",
   },
   RECIPE_STEP: {
     BASE: "/api/RecipeStep",
