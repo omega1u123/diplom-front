@@ -11,6 +11,13 @@ export interface Post {
   userId: string;
   username: string;
   userFileUrl: string;
-  fileUrl: string | null;
+  fileUrl: string;
   createdA: string;
+}
+
+export interface PostResponse {
+  posts: Post[];
+  page: number;
+  pageSize: number;
+  totalCount: number;
 }

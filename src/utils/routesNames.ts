@@ -16,6 +16,7 @@ export const API_ROUTES = {
   },
   POST: {
     BASE: "/api/Post",
+    LIKE: "/api/Post/like",
   },
   RECIPE: {
     BASE: "/api/recipe",
@@ -32,6 +33,9 @@ export const API_ROUTES = {
   },
   MEDIA: {
     BASE: "/api/file",
+  },
+  COMMENT: {
+    BASE: "/api/Comment",
   },
 };
 

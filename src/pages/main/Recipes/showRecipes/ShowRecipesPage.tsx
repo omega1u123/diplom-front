@@ -60,7 +60,9 @@ export default function ShowRecipesPage() {
           {isLoading ? (
             <div>Загрузка</div>
           ) : (
-            recipes.map((recipe) => <RecipeCard recipe={recipe} />)
+            recipes.map((recipe) => (
+              <RecipeCard key={recipe.id} recipe={recipe} />
+            ))
           )}
         </div>
       </div>
