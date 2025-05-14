@@ -31,8 +31,19 @@ export const postApi = createApi({
       }),
       invalidatesTags: ["Posts"],
     }),
+    getPostsByUserId: builder.query<Post[], string>({
+      query: (id) => ({
+        url: `${BASE_URL}${API_ROUTES.POST.USER}/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Posts"],
+    }),
   }),
 });
 
-export const { useCreatePostMutation, useGetPostsQuery, useLikePostMutation } =
-  postApi;
+export const {
+  useCreatePostMutation,
+  useGetPostsQuery,
+  useLikePostMutation,
+  useGetPostsByUserIdQuery,
+} = postApi;

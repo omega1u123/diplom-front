@@ -41,7 +41,7 @@ const Header = () => {
         <NavButton
           text={"Мой профиль"}
           width={36}
-          path={routesNames.profilePath}
+          path={`${routesNames.profilePath}/${data?.id}`}
         />
         <button
           onClick={handleExit}

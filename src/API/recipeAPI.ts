@@ -6,7 +6,7 @@ import { Recipe, IRecipeFilter, RecipeForm } from "@/types/recipeTypes";
 export const recipeApi = createApi({
   reducerPath: "recipeApi",
   baseQuery,
-  tagTypes: ["Recipes"],
+  tagTypes: ["Recipes", "SavedRecipes"],
   endpoints: (builder) => ({
     createRecipe: builder.mutation<Recipe, RecipeForm>({
       query: (data) => ({
@@ -14,6 +14,7 @@ export const recipeApi = createApi({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Recipes"],
     }),
     filterRecipe: builder.query<Recipe[], IRecipeFilter>({
       query: (data) => ({
@@ -21,12 +22,35 @@ export const recipeApi = createApi({
         method: "POST",
         body: data,
       }),
+      providesTags: ["Recipes"],
     }),
     getRecipeById: builder.query<Recipe, string>({
       query: (id) => ({
         url: `${BASE_URL}${API_ROUTES.RECIPE.BASE}/${id}`,
         method: "GET",
       }),
+    }),
+    saveRecipe: builder.mutation<Recipe, { recipeId: string; userId: string }>({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.RECIPE.SAVE}`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["SavedRecipes"],
+    }),
+    getSavedRecipesByUserId: builder.query<Recipe[], string>({
+      query: (id) => ({
+        url: `${BASE_URL}${API_ROUTES.RECIPE.SAVED}?userId=${id}`,
+        METHOD: "GET",
+      }),
+      providesTags: ["Recipes"],
+    }),
+    getRecipesByUserId: builder.query<Recipe[], string>({
+      query: (id) => ({
+        url: `${BASE_URL}${API_ROUTES.RECIPE.USER}/${id}`,
+        METHOD: "GET",
+      }),
+      providesTags: ["Recipes"],
     }),
   }),
 });
@@ -35,4 +59,7 @@ export const {
   useCreateRecipeMutation,
   useFilterRecipeQuery,
   useGetRecipeByIdQuery,
+  useGetSavedRecipesByUserIdQuery,
+  useGetRecipesByUserIdQuery,
+  useSaveRecipeMutation,
 } = recipeApi;

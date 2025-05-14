@@ -1,6 +1,6 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "@/API/baseQuery";
-import { UserRatingResponse } from "@/types/userTypes";
+import { User, UserRatingResponse } from "@/types/userTypes";
 import { API_ROUTES, BASE_URL } from "@/utils/routesNames";
 
 export const userApi = createApi({
@@ -17,7 +17,13 @@ export const userApi = createApi({
         params: args,
       }),
     }),
+    getUserById: builder.query<User, string>({
+      query: (id) => ({
+        url: `${BASE_URL}${API_ROUTES.USER.BASE}/${id}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetRatingUsersQuery } = userApi;
+export const { useGetRatingUsersQuery, useGetUserByIdQuery } = userApi;

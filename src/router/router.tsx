@@ -14,6 +14,11 @@ import ShowRecipesPage from "@/pages/main/Recipes/showRecipes/ShowRecipesPage";
 import ShowRatingPage from "@/pages/main/Rating/showRating/ShowRatingPage";
 import RecipePage from "@/pages/main/Recipes/recipePage.tsx/RecipePage";
 import ShowPostPage from "@/pages/main/Posts/showPost/ShowPostPage";
+import ProfilePage from "@/pages/main/Profile/ProfilePage";
+import ProfileRecipePage from "@/pages/main/Profile/components/ProfileRecipePage";
+import ProfilePostPage from "@/pages/main/Profile/components/ProfilePostPage";
+import ProfileSavedRecipePage from "@/pages/main/Profile/components/ProfileSavedRecipePage";
+import ProfileAchievementsPage from "@/pages/main/Profile/components/ProfileAchievementsPage";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +79,36 @@ const router = createBrowserRouter([
                   {
                     index: true,
                     element: <ShowRatingPage />,
+                  },
+                ],
+              },
+              {
+                path: routesNames.profilePath,
+                element: <Navigate to="/recipes" replace />,
+              },
+              {
+                path: `${routesNames.profilePath}/:id`,
+                element: <ProfilePage />,
+                children: [
+                  {
+                    index: true,
+                    element: <Navigate to="recipes" replace />,
+                  },
+                  {
+                    path: "recipes",
+                    element: <ProfileRecipePage />,
+                  },
+                  {
+                    path: "posts",
+                    element: <ProfilePostPage />,
+                  },
+                  {
+                    path: "saved-recipes",
+                    element: <ProfileSavedRecipePage />,
+                  },
+                  {
+                    path: "achievements",
+                    element: <ProfileAchievementsPage />,
                   },
                 ],
               },

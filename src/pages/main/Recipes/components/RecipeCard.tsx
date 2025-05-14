@@ -8,7 +8,7 @@ interface RecipeCardProps {
 export const RecipeCard = ({ recipe }: RecipeCardProps) => {
   const navigate = useNavigate();
   const handleNavigate = (id: string) => {
-    navigate(`${id}`);
+    navigate(`/recipes/${id}`, { replace: true });
   };
   return (
     <div

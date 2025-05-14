@@ -2,7 +2,7 @@ import {
   useGetRecipeCommentsQuery,
   usePostCommentMutation,
 } from "@/API/commentAPI";
-import { useGetRecipeByIdQuery } from "@/API/recipeAPI";
+import { useGetRecipeByIdQuery, useSaveRecipeMutation } from "@/API/recipeAPI";
 import { CommentCard } from "@/components/CommentCard";
 import { Textarea } from "@/components/Textarea";
 import { useAppSelector } from "@/hooks/reduxHooks";
@@ -30,6 +30,17 @@ export default function RecipePage() {
       setIsCreate(false);
     } catch {
       return;
+    }
+  };
+
+  const [save] = useSaveRecipeMutation();
+  const handleSave = async () => {
+    if (data) {
+      try {
+        await save({ recipeId: data?.id, userId });
+      } catch {
+        return;
+      }
     }
   };
   return (
@@ -67,13 +78,17 @@ export default function RecipePage() {
                 </div>
               </div>
             </div>
-            <button
-              type="submit"
-              form="recipe-form"
-              className="flex justify-center items-center w-36 h-9 rounded-xl bg-[#C9DCFF] text-xl font-normal text-black cursor-pointer hover:bg-[#B0CFFF]"
-            >
-              Сохранить
-            </button>
+            {userId === data?.user.id ? (
+              <button
+                type="button"
+                onClick={handleSave}
+                className="flex justify-center items-center w-36 h-9 rounded-xl bg-[#C9DCFF] text-xl font-normal text-black cursor-pointer hover:bg-[#B0CFFF]"
+              >
+                Сохранить
+              </button>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-2 justify-start items-start w-[1272px]  py-3 px-4 rounded-[12px] bg-gray-200">
@@ -83,7 +98,7 @@ export default function RecipePage() {
           <div>
             <h2 className="text-2xl font-normal text-black">Ингредиенты:</h2>
             {data?.ingredientList.map((x, index) => (
-              <p className="text-xl font-normal text-black">
+              <p key={x.id} className="text-xl font-normal text-black">
                 {index + 1}. {x.name}, {x.quantity}
               </p>
             ))}
@@ -93,7 +108,7 @@ export default function RecipePage() {
             {data?.recipeStepList
               .sort((a, b) => a.stepNumber - b.stepNumber)
               .map((x) => (
-                <p className="text-xl font-normal text-black">
+                <p key={x.id} className="text-xl font-normal text-black">
                   {x.stepNumber}. {x.description}
                 </p>
               ))}
@@ -149,7 +164,7 @@ export default function RecipePage() {
             )}
           </form>
           {comments?.map((x) => (
-            <CommentCard comment={x} />
+            <CommentCard key={x.id} comment={x} />
           ))}
         </div>
       </div>

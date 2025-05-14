@@ -8,6 +8,7 @@ export const API_ROUTES = {
     REFRESH_TOKEN: "/api/Auth/refresh",
   },
   USER: {
+    BASE: "/api/User",
     RATING: "/api/User/ratings",
   },
   INGREDIENT: {
@@ -16,10 +17,14 @@ export const API_ROUTES = {
   },
   POST: {
     BASE: "/api/Post",
+    USER: "/api/Post/by-user",
     LIKE: "/api/Post/like",
   },
   RECIPE: {
     BASE: "/api/recipe",
+    SAVE: "/api/savedRecipe/saveRecipe",
+    SAVED: "/api/savedRecipe/savedRecipeList",
+    USER: "/api/recipe/user",
     FILTER: "/api/recipe/filter",
   },
   RECIPE_STEP: {
