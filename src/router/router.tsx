@@ -21,6 +21,7 @@ import ProfileSavedRecipePage from "@/pages/main/Profile/subpages/ProfileSavedRe
 import ProfileAchievementsPage from "@/pages/main/Profile/subpages/ProfileAchievementsPage";
 import ContestsPage from "@/pages/main/Contests/ContestsPage";
 import ActiveContestsPage from "@/pages/main/Contests/subpages/ActiveContestsPage";
+import ProfilePaidRecipePage from "@/pages/main/Profile/subpages/ProfilePaidRecipePage";
 
 const router = createBrowserRouter([
   {
@@ -111,6 +112,10 @@ const router = createBrowserRouter([
                   {
                     path: "achievements",
                     element: <ProfileAchievementsPage />,
+                  },
+                  {
+                    path: "paid-recipes",
+                    element: <ProfilePaidRecipePage />,
                   },
                 ],
               },

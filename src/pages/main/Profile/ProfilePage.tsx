@@ -1,4 +1,5 @@
 import {
+  useGetIsPaidSubQuery,
   useGetIsSubQuery,
   useGetServicesByUserIdQuery,
   useGetSubMutation,
@@ -26,6 +27,14 @@ export default function ProfilePage() {
     },
     { skip: userId === id || userId === "" }
   );
+  const { data: isPaidSub } = useGetIsPaidSubQuery(
+    {
+      subscriberId: userId,
+      targetUserId: id!,
+    },
+    { skip: userId === id || userId === "" }
+  );
+  console.log(isPaidSub + "paid");
   const { data: Services } = useGetServicesByUserIdQuery(id!);
   const [sub] = useGetSubMutation();
   const [unsub] = useGetUnSubMutation();
@@ -126,7 +135,11 @@ export default function ProfilePage() {
             </div>
           </div>
           <div className="flex flex-col w-full gap-[25px]">
-            <ProfileTabs userId={id!} />
+            <ProfileTabs
+              userId={id!}
+              currentUserId={userId}
+              isPaidSub={isPaidSub?.isSubscribed}
+            />
             <div>
               <Outlet />
             </div>

@@ -45,9 +45,16 @@ export const recipeApi = createApi({
       }),
       providesTags: ["Recipes"],
     }),
-    getRecipesByUserId: builder.query<Recipe[], string>({
+    getPublicRecipesByUserId: builder.query<Recipe[], string>({
       query: (id) => ({
-        url: `${BASE_URL}${API_ROUTES.RECIPE.USER}/${id}`,
+        url: `${BASE_URL}${API_ROUTES.RECIPE.PUBLIC}/${id}`,
+        METHOD: "GET",
+      }),
+      providesTags: ["Recipes"],
+    }),
+    getPrivateRecipesByUserId: builder.query<Recipe[], string>({
+      query: (id) => ({
+        url: `${BASE_URL}${API_ROUTES.RECIPE.PAID}/${id}`,
         METHOD: "GET",
       }),
       providesTags: ["Recipes"],
@@ -60,6 +67,7 @@ export const {
   useFilterRecipeQuery,
   useGetRecipeByIdQuery,
   useGetSavedRecipesByUserIdQuery,
-  useGetRecipesByUserIdQuery,
+  useGetPublicRecipesByUserIdQuery,
+  useGetPrivateRecipesByUserIdQuery,
   useSaveRecipeMutation,
 } = recipeApi;

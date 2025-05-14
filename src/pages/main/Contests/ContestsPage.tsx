@@ -3,8 +3,8 @@ import { routesNames } from "@/utils/routesNames";
 import { Outlet } from "react-router-dom";
 
 const NavArray = [
-  { text: "Активные", path: `${routesNames.recipesPath}/active` },
-  { text: "Неактивные", path: `${routesNames.recipesPath}/not-active` },
+  { text: "Активные", path: `${routesNames.contestPath}/active` },
+  { text: "Неактивные", path: `${routesNames.contestPath}/not-active` },
 ];
 
 export default function ContestsPage() {

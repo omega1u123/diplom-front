@@ -1,10 +1,10 @@
-import { useGetRecipesByUserIdQuery } from "@/API/recipeAPI";
+import { useGetPublicRecipesByUserIdQuery } from "@/API/recipeAPI";
 import { RecipeCard } from "@/pages/main/Recipes/components/RecipeCard";
 import { useParams } from "react-router-dom";
 
 export default function ProfileRecipePage() {
   const { id } = useParams();
-  const { data: recipes, isLoading } = useGetRecipesByUserIdQuery(id!);
+  const { data: recipes, isLoading } = useGetPublicRecipesByUserIdQuery(id!);
   return (
     <div className="flex flex-wrap justify-start items-start gap-5">
       {isLoading ? (

@@ -18,8 +18,10 @@ import {
 import { uploadFileToMinio } from "@/utils/uploadToMinio";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateRecipePage() {
+  const navigate = useNavigate();
   const userId = useAppSelector((state) => state.auth.userId);
   const [image, setImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -40,6 +42,7 @@ export default function CreateRecipePage() {
   };
   const { register, handleSubmit } = useForm<RecipeForm>();
   const handleSubmitButton = async (data: RecipeForm) => {
+    const isPublic = data.isPublic === "true";
     const ingredientsId = ingredients?.map((x) => x.id) ?? [];
     const recipeStepsId = recipeSteps?.map((x) => x.id) ?? [];
     const dietaryRestrictionId = dietaryRestriction?.map((x) => x.id) ?? [];
@@ -48,7 +51,7 @@ export default function CreateRecipePage() {
     let fileUrl = "";
     try {
       fileUrl = await fetchMedia(image).unwrap();
-      await uploadFileToMinio(image, fileUrl);
+      // await uploadFileToMinio(image, fileUrl);
       console.log(fileUrl);
     } catch {
       return;
@@ -68,7 +71,9 @@ export default function CreateRecipePage() {
         recipeStepIdList: recipeStepsId,
         dietaryRestrictionIdList: dietaryRestrictionId,
         fileUrl,
+        isPublic,
       });
+      navigate("/recipes", { replace: true });
       console.log(Recipe);
     } catch {
       return;
@@ -84,7 +89,7 @@ export default function CreateRecipePage() {
         className="flex flex-col justify-center items-center h-full w-full gap-[34px]"
       >
         <div className="flex justify-center gap-[34px]">
-          <div className="flex justify-center items-center w-[767px] h-[628px] bg-gray-300">
+          <div className="flex justify-center items-center w-[767px] bg-gray-300">
             <ImageUpload
               onImageSelect={handleImageSelect}
               preview={previewUrl}
@@ -154,6 +159,33 @@ export default function CreateRecipePage() {
                 />
               </div>
             </div>
+            {/* Select */}
+            <div className="flex flex-col items-start">
+              <p
+                className="font-normal text-black"
+                style={{ fontSize: `20px` }}
+              >
+                Платный?
+              </p>
+              <select
+                {...register("isPublic")}
+                className={`flex justify-start px-1 border-[1px] border-[#D9D9D9] rounded-[12px]`}
+                style={{ width: `339px`, height: `44px` }}
+              >
+                <option key="none" value="">
+                  Выберите опцию
+                </option>
+                {[
+                  { id: "1", name: "Платный", value: "false" },
+                  { id: "2", name: "Бесплатный", value: "true" },
+                ].map((option) => (
+                  <option key={option.id} value={option.value}>
+                    {option.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* Select */}
             <button
               type="submit"
               form="recipe-form"

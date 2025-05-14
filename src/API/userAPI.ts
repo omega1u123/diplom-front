@@ -41,6 +41,17 @@ export const userApi = createApi({
       }),
       providesTags: ["Users"],
     }),
+    getIsPaidSub: builder.query<
+      { isSubscribed: boolean },
+      { subscriberId: string; targetUserId: string }
+    >({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.USER.BASE}/is-paidSubscribed`,
+        method: "POST",
+        body: data,
+      }),
+      providesTags: ["Users"],
+    }),
     getSub: builder.mutation<
       void,
       { subscriberId: string; targetUserId: string }
@@ -93,6 +104,7 @@ export const {
   useGetRatingUsersQuery,
   useGetUserByIdQuery,
   useGetIsSubQuery,
+  useGetIsPaidSubQuery,
   useGetSubMutation,
   useGetUnSubMutation,
   useCreateServiceMutation,

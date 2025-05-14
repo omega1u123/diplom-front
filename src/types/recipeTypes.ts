@@ -38,6 +38,7 @@ export interface Recipe {
   description: string;
   user: User;
   fileUrl: string;
+  isPublic: boolean;
 }
 
 export interface RecipeForm {
@@ -55,6 +56,7 @@ export interface RecipeForm {
   description: string;
   userId: string;
   fileUrl: string | null;
+  isPublic: string | boolean;
 }
 
 export interface Ingredient {

@@ -24,6 +24,8 @@ export const API_ROUTES = {
   },
   RECIPE: {
     BASE: "/api/recipe",
+    PUBLIC: "/api/recipe/public/user",
+    PAID: "/api/recipe/paid/user",
     SAVE: "/api/savedRecipe/saveRecipe",
     SAVED: "/api/savedRecipe/savedRecipeList",
     USER: "/api/recipe/user",

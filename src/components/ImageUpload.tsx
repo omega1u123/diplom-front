@@ -26,7 +26,7 @@ export const ImageUpload = ({ onImageSelect, preview }: ImageUploadProps) => {
   };
 
   return (
-    <div className="flex justify-center items-center w-full h-full relative">
+    <div className="flex justify-center items-center min-w-full min-h-full relative">
       <input
         id="image-upload"
         type="file"
