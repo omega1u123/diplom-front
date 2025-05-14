@@ -1,16 +1,12 @@
 import { useFilterRecipeQuery } from "@/API/recipeAPI";
-import { useAppDispatch, useAppSelector } from "@/hooks/reduxHooks";
 import { RecipeCard } from "@/pages/main/Recipes/components/RecipeCard";
 import { RecipeFilter } from "@/pages/main/Recipes/components/RecipeFilter";
-import { setRecipes } from "@/store/slices/recipeSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IRecipeFilter } from "./../../../../types/recipeTypes";
 
 export default function ShowRecipesPage() {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const recipes = useAppSelector((state) => state.recipe.recipes);
   const [filter, setFilter] = useState<Partial<IRecipeFilter>>({
     dietaryRestrictionList: null,
     ingredientList: null,
@@ -25,13 +21,7 @@ export default function ShowRecipesPage() {
     page: 1,
     pageSize: 9999,
   };
-  const { data, isLoading } = useFilterRecipeQuery(request);
-
-  useEffect(() => {
-    if (data) {
-      dispatch(setRecipes(data));
-    }
-  }, [data, dispatch]);
+  const { data: recipes, isLoading } = useFilterRecipeQuery(request);
 
   const handleCreateLink = () => {
     navigate("/recipes/create");
@@ -60,7 +50,7 @@ export default function ShowRecipesPage() {
           {isLoading ? (
             <div>Загрузка</div>
           ) : (
-            recipes.map((recipe) => (
+            recipes?.map((recipe) => (
               <RecipeCard key={recipe.id} recipe={recipe} />
             ))
           )}

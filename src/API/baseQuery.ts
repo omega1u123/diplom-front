@@ -6,7 +6,7 @@ import client from "@/services/client";
 import { clearAuthState } from "@/store/slices/authSlice";
 import { Action } from "@reduxjs/toolkit";
 
-let injectedDispatch: ((action: Action) => void) | null = null;
+export let injectedDispatch: ((action: Action) => void) | null = null;
 
 export const injectStore = (dispatch: (action: Action) => void) => {
   injectedDispatch = dispatch;

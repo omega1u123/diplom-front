@@ -10,11 +10,11 @@ const NavArray = [
   { text: "Рецепты", path: routesNames.recipesPath },
   { text: "Посты", path: routesNames.postsPath },
   { text: "Рейтинг", path: routesNames.ratingPath },
+  { text: "Конкурсы", path: routesNames.contestPath },
 ];
 const Header = () => {
   const dispatch = useAppDispatch();
   const accessToken = localStorage.getItem("accessToken");
-  const refreshToken = localStorage.getItem("refreshToken");
 
   const { data } = useGetInfoQuery(accessToken!, {
     skip: accessToken === null,
@@ -41,7 +41,6 @@ const Header = () => {
       <div className="flex justify-center items-center gap-6">
         <NavButton
           text={"Мой профиль"}
-          width={36}
           path={`${routesNames.profilePath}/${data?.id}`}
         />
         <button

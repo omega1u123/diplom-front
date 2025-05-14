@@ -29,6 +29,9 @@ export const API_ROUTES = {
     USER: "/api/recipe/user",
     FILTER: "/api/recipe/filter",
   },
+  CONTEST: {
+    BASE: "/api/contest",
+  },
   RECIPE_STEP: {
     BASE: "/api/RecipeStep",
   },
@@ -53,4 +56,5 @@ export const routesNames = {
   postsPath: "posts",
   ratingPath: "rating",
   profilePath: "profile",
+  contestPath: "contests",
 };

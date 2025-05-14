@@ -19,6 +19,8 @@ import ProfileRecipePage from "@/pages/main/Profile/subpages/ProfileRecipePage";
 import ProfilePostPage from "@/pages/main/Profile/subpages/ProfilePostPage";
 import ProfileSavedRecipePage from "@/pages/main/Profile/subpages/ProfileSavedRecipePage";
 import ProfileAchievementsPage from "@/pages/main/Profile/subpages/ProfileAchievementsPage";
+import ContestsPage from "@/pages/main/Contests/ContestsPage";
+import ActiveContestsPage from "@/pages/main/Contests/subpages/ActiveContestsPage";
 
 const router = createBrowserRouter([
   {
@@ -110,6 +112,14 @@ const router = createBrowserRouter([
                     path: "achievements",
                     element: <ProfileAchievementsPage />,
                   },
+                ],
+              },
+              {
+                path: routesNames.contestPath,
+                element: <ContestsPage />,
+                children: [
+                  { index: true, element: <Navigate to="active" replace /> },
+                  { path: "active", element: <ActiveContestsPage /> },
                 ],
               },
             ],

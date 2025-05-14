@@ -1,7 +1,6 @@
 import { authApi } from "@/API/authAPI";
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/authSlice";
-import recipeReducer from "./slices/recipeSlice";
 import { injectStore } from "@/API/baseQuery";
 import { ingredientApi } from "@/API/ingredientAPI";
 import { recipeStepApi } from "@/API/recipeStepAPI";
@@ -12,11 +11,11 @@ import { cuisineApi } from "@/API/cuisineAPI";
 import { userApi } from "@/API/userAPI";
 import { postApi } from "@/API/postAPI";
 import { commentApi } from "@/API/commentAPI";
+import { contestApi } from "@/API/contestAPI";
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    recipe: recipeReducer,
     [authApi.reducerPath]: authApi.reducer,
     [ingredientApi.reducerPath]: ingredientApi.reducer,
     [recipeStepApi.reducerPath]: recipeStepApi.reducer,
@@ -27,6 +26,7 @@ const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [postApi.reducerPath]: postApi.reducer,
     [commentApi.reducerPath]: commentApi.reducer,
+    [contestApi.reducerPath]: contestApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -39,7 +39,8 @@ const store = configureStore({
       .concat(cuisineApi.middleware)
       .concat(userApi.middleware)
       .concat(postApi.middleware)
-      .concat(commentApi.middleware),
+      .concat(commentApi.middleware)
+      .concat(contestApi.middleware),
 });
 
 injectStore(store.dispatch);
