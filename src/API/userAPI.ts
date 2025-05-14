@@ -22,8 +22,48 @@ export const userApi = createApi({
         url: `${BASE_URL}${API_ROUTES.USER.BASE}/${id}`,
         method: "GET",
       }),
+      providesTags: ["Users"],
+    }),
+    getIsSub: builder.query<
+      { isSubscribed: boolean },
+      { subscriberId: string; targetUserId: string }
+    >({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.USER.BASE}/is-subscribed`,
+        method: "POST",
+        body: data,
+      }),
+      providesTags: ["Users"],
+    }),
+    getSub: builder.mutation<
+      void,
+      { subscriberId: string; targetUserId: string }
+    >({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.USER.BASE}/subscribe`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Users"],
+    }),
+    getUnSub: builder.mutation<
+      void,
+      { subscriberId: string; targetUserId: string }
+    >({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.USER.BASE}/unsubscribe`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Users"],
     }),
   }),
 });
 
-export const { useGetRatingUsersQuery, useGetUserByIdQuery } = userApi;
+export const {
+  useGetRatingUsersQuery,
+  useGetUserByIdQuery,
+  useGetIsSubQuery,
+  useGetSubMutation,
+  useGetUnSubMutation,
+} = userApi;

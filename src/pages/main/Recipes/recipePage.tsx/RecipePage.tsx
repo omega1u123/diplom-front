@@ -79,6 +79,8 @@ export default function RecipePage() {
               </div>
             </div>
             {userId === data?.user.id ? (
+              ""
+            ) : (
               <button
                 type="button"
                 onClick={handleSave}
@@ -86,8 +88,6 @@ export default function RecipePage() {
               >
                 Сохранить
               </button>
-            ) : (
-              ""
             )}
           </div>
         </div>

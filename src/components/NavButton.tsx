@@ -8,7 +8,9 @@ interface NavButtonProps {
 export const NavButton = ({ text, path, width = 24 }: NavButtonProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const isActive = location.pathname === `/${path}`;
+  const isActive =
+    location.pathname === `/${path}` ||
+    location.pathname.startsWith(`/${path}/`);
   return (
     <button
       onClick={() => {
