@@ -1,12 +1,18 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "@/API/baseQuery";
-import { User, UserRatingResponse } from "@/types/userTypes";
+import {
+  OrderForm,
+  PaidService,
+  PaidServiceForm,
+  User,
+  UserRatingResponse,
+} from "@/types/userTypes";
 import { API_ROUTES, BASE_URL } from "@/utils/routesNames";
 
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery,
-  tagTypes: ["Users"],
+  tagTypes: ["Users", "Services", "Orders"],
   endpoints: (builder) => ({
     getRatingUsers: builder.query<
       UserRatingResponse,
@@ -57,6 +63,29 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Users"],
     }),
+    createService: builder.mutation<void, PaidServiceForm>({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.USER.SERVICE}`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Services"],
+    }),
+    getServicesByUserId: builder.query<PaidService[], string>({
+      query: (id) => ({
+        url: `${BASE_URL}${API_ROUTES.USER.SERVICE}/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Services"],
+    }),
+    createOrder: builder.mutation<void, OrderForm>({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.USER.ORDER}`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Orders"],
+    }),
   }),
 });
 
@@ -66,4 +95,7 @@ export const {
   useGetIsSubQuery,
   useGetSubMutation,
   useGetUnSubMutation,
+  useCreateServiceMutation,
+  useGetServicesByUserIdQuery,
+  useCreateOrderMutation,
 } = userApi;

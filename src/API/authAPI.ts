@@ -5,7 +5,6 @@ import { LoginForm, RegisterForm } from "@/types/authTypes";
 import { User } from "@/types/userTypes";
 
 export interface AuthResponse {
-  id: string;
   accessToken: string;
   refreshToken: string;
 }
@@ -30,6 +29,13 @@ export const authApi = createApi({
         body: credentials,
       }),
       invalidatesTags: [{ type: "Auth" }],
+    }),
+    refresh: builder.mutation<AuthResponse, AuthResponse>({
+      query: (credentials) => ({
+        url: `${BASE_URL}${API_ROUTES.AUTH.REFRESH_TOKEN}`,
+        method: "POST",
+        body: credentials,
+      }),
     }),
     getInfo: builder.query<User, string>({
       query: (credentials) => ({

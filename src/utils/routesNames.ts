@@ -10,6 +10,8 @@ export const API_ROUTES = {
   USER: {
     BASE: "/api/User",
     RATING: "/api/User/ratings",
+    SERVICE: "/api/PaidService",
+    ORDER: "/api/Order",
   },
   INGREDIENT: {
     BASE: "/api/Ingredient",

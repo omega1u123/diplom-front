@@ -1,4 +1,5 @@
 import {
+  FieldErrors,
   FieldValues,
   Path,
   RegisterOptions,
@@ -9,6 +10,7 @@ interface TextareaProps<T extends FieldValues> {
   name?: Path<T>;
   register?: UseFormRegister<T>;
   validation?: RegisterOptions<T, Path<T>>;
+  errors?: FieldErrors<T>;
   label?: string;
   placeholder?: string;
   width?: string;
@@ -22,6 +24,7 @@ export const Textarea = <T extends FieldValues>({
   name,
   register,
   validation,
+  errors,
   label,
   placeholder,
   width = "339",
@@ -30,6 +33,7 @@ export const Textarea = <T extends FieldValues>({
   textSize = "20",
   rows = 4,
 }: TextareaProps<T>) => {
+  const errorMessage = name && (errors?.[name]?.message as string);
   return (
     <div className="flex flex-col items-start">
       <p
@@ -53,6 +57,9 @@ export const Textarea = <T extends FieldValues>({
           paddingTop: "4px",
         }}
       />
+      {errorMessage && (
+        <p className="text-red-500 text-sm mt-1">{errorMessage}</p>
+      )}
     </div>
   );
 };

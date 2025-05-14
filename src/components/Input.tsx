@@ -1,4 +1,5 @@
 import {
+  FieldErrors,
   FieldValues,
   Path,
   RegisterOptions,
@@ -10,6 +11,7 @@ interface InputProps<T extends FieldValues> {
   inputType?: string;
   register?: UseFormRegister<T>;
   validation?: RegisterOptions<T, Path<T>>;
+  errors?: FieldErrors<T>;
   label?: string;
   placeholder?: string;
   width?: string;
@@ -22,6 +24,7 @@ export const Input = <T extends FieldValues>({
   name,
   register,
   validation,
+  errors,
   inputType = "text",
   label,
   placeholder,
@@ -30,6 +33,7 @@ export const Input = <T extends FieldValues>({
   rounded = "12",
   textSize = "20",
 }: InputProps<T>) => {
+  const errorMessage = name && (errors?.[name]?.message as string);
   return (
     <div className="flex flex-col items-start">
       <p
@@ -45,6 +49,9 @@ export const Input = <T extends FieldValues>({
         className={`flex justify-start px-1 border-[1px] border-[#D9D9D9] rounded-[${rounded}px] placeholder:text-sm placeholder:text-gray-400`}
         style={{ width: `${width}px`, height: `${height}px` }}
       />
+      {errorMessage && (
+        <p className="text-red-500 text-sm mt-1">{errorMessage}</p>
+      )}
     </div>
   );
 };

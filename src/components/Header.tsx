@@ -14,6 +14,7 @@ const NavArray = [
 const Header = () => {
   const dispatch = useAppDispatch();
   const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("refreshToken");
 
   const { data } = useGetInfoQuery(accessToken!, {
     skip: accessToken === null,

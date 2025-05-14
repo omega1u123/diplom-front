@@ -15,10 +15,10 @@ import ShowRatingPage from "@/pages/main/Rating/showRating/ShowRatingPage";
 import RecipePage from "@/pages/main/Recipes/recipePage.tsx/RecipePage";
 import ShowPostPage from "@/pages/main/Posts/showPost/ShowPostPage";
 import ProfilePage from "@/pages/main/Profile/ProfilePage";
-import ProfileRecipePage from "@/pages/main/Profile/components/ProfileRecipePage";
-import ProfilePostPage from "@/pages/main/Profile/components/ProfilePostPage";
-import ProfileSavedRecipePage from "@/pages/main/Profile/components/ProfileSavedRecipePage";
-import ProfileAchievementsPage from "@/pages/main/Profile/components/ProfileAchievementsPage";
+import ProfileRecipePage from "@/pages/main/Profile/subpages/ProfileRecipePage";
+import ProfilePostPage from "@/pages/main/Profile/subpages/ProfilePostPage";
+import ProfileSavedRecipePage from "@/pages/main/Profile/subpages/ProfileSavedRecipePage";
+import ProfileAchievementsPage from "@/pages/main/Profile/subpages/ProfileAchievementsPage";
 
 const router = createBrowserRouter([
   {
