@@ -12,7 +12,7 @@ export default function ShowRatingPage() {
   if (isLoading) return <p>Загрузка рейтинга...</p>;
   if (isError) return <p>Ошибка при загрузке рейтинга</p>;
   return (
-    <section className="flex flex-col items-center">
+    <section className="flex flex-col items-center gap-3.5">
       <h1 className="text-[42px] font-bold text-black">Рейтинг</h1>
       {UserRatings &&
         UserRatings.map((user, index) => (

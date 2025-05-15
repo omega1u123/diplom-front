@@ -21,7 +21,12 @@ export default function ContestsPage() {
         <div className="flex justify-between items-center w-full">
           <div className="flex gap-5">
             {NavArray.map((x, index) => (
-              <NavButton key={index} text={x.text} path={x.path} />
+              <NavButton
+                key={index}
+                text={x.text}
+                path={x.path}
+                activeColor="bg-blue-200"
+              />
             ))}
           </div>
           <button

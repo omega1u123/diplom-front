@@ -92,9 +92,13 @@ export default function RecipePage() {
           </div>
         </div>
         <div className="flex flex-col gap-2 justify-start items-start w-[1272px]  py-3 px-4 rounded-[12px] bg-gray-200">
-          <p className="w-[1236px] h-[150px] text-xl font-normal text-black">
-            {data?.description}
-          </p>
+          <div>
+            <h2 className="text-2xl font-normal text-black">Описание:</h2>
+            <p className="w-[1236px] text-xl font-normal text-black">
+              {data?.description}
+            </p>
+          </div>
+
           <div>
             <h2 className="text-2xl font-normal text-black">Ингредиенты:</h2>
             {data?.ingredientList.map((x, index) => (

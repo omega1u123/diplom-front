@@ -101,11 +101,33 @@ export default function CreateRecipePage() {
               register={register}
               label={"Название"}
             />
-            <Input<RecipeForm>
-              name="complexity"
-              register={register}
-              label={"Сложность"}
-            />
+
+            <div className="flex flex-col items-start">
+              <p
+                className="font-normal text-black"
+                style={{ fontSize: `20px` }}
+              >
+                Сложность
+              </p>
+              <select
+                {...register("complexity")}
+                className={`flex justify-start px-1 border-[1px] border-[#D9D9D9] rounded-[12px]`}
+                style={{ width: `339px`, height: `44px` }}
+              >
+                <option key="none" value="null">
+                  Выберите опцию
+                </option>
+                {[
+                  { id: "1", name: "Легкий", value: 0 },
+                  { id: "2", name: "Средний", value: 1 },
+                  { id: "2", name: "Сложный", value: 2 },
+                ].map((option) => (
+                  <option key={option.id} value={option.value}>
+                    {option.name}
+                  </option>
+                ))}
+              </select>
+            </div>
             <DietaryRestrictionList
               dietaryRestriction={dietaryRestriction}
               setDietaryRestriction={setDietaryRestriction}
@@ -172,7 +194,7 @@ export default function CreateRecipePage() {
                 className={`flex justify-start px-1 border-[1px] border-[#D9D9D9] rounded-[12px]`}
                 style={{ width: `339px`, height: `44px` }}
               >
-                <option key="none" value="">
+                <option key="none" value="null">
                   Выберите опцию
                 </option>
                 {[
@@ -195,7 +217,7 @@ export default function CreateRecipePage() {
             </button>
           </div>
         </div>
-        <div className="flex flex-col gap-2 justify-start items-start w-[1272px] min-h-[467px] py-3 px-4 rounded-[12px] bg-gray-200">
+        <div className="flex flex-col gap-2 justify-start items-start w-[1272px] min-h-[300px] py-3 px-4 rounded-[12px] bg-gray-200">
           <Textarea<RecipeForm>
             name="description"
             register={register}
