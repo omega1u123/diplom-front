@@ -27,7 +27,7 @@ export const CreatePostModal = forwardRef<HTMLDialogElement>((_, ref) => {
     let fileUrl = "";
     try {
       fileUrl = await fetchMedia(image).unwrap();
-      // await uploadFileToMinio(image, fileUrl);
+      await uploadFileToMinio(image, fileUrl);
     } catch {
       return;
     }
