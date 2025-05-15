@@ -51,7 +51,7 @@ export default function CreateRecipePage() {
     let fileUrl = "";
     try {
       fileUrl = await fetchMedia(image).unwrap();
-      // await uploadFileToMinio(image, fileUrl);
+      await uploadFileToMinio(image, fileUrl);
       console.log(fileUrl);
     } catch {
       return;
