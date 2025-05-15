@@ -13,7 +13,7 @@ export const NavButton = ({ text, path }: NavButtonProps) => {
   return (
     <button
       onClick={() => {
-        navigate(`/${path}`);
+        navigate(`/${path}`, { replace: true });
       }}
       disabled={isActive}
       className={`flex justify-center items-center  h-9 px-3 py-1 rounded-[12px] cursor-pointer ${

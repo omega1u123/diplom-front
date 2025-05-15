@@ -1,18 +1,20 @@
+import { useGetRecipeVotesQuery } from "@/API/contestAPI";
 import { Recipe } from "@/types/recipeTypes";
 import { useNavigate } from "react-router-dom";
 
-interface RecipeCardProps {
+interface ContestRecipeCardProps {
+  contestId: string;
   recipe: Recipe;
-  isClickable?: boolean;
 }
-
-export const RecipeCard = ({ recipe, isClickable = true }: RecipeCardProps) => {
+export const ContestRecipeCard = ({
+  contestId,
+  recipe,
+}: ContestRecipeCardProps) => {
   const navigate = useNavigate();
   const handleNavigate = (id: string) => {
-    if (isClickable) {
-      navigate(`/recipes/${id}`, { replace: true });
-    }
+    navigate(`/contests/${contestId}/recipe/${id}`, { replace: true });
   };
+  const { data } = useGetRecipeVotesQuery(recipe.id);
   return (
     <div
       onClick={() => handleNavigate(recipe.id)}
@@ -44,7 +46,7 @@ export const RecipeCard = ({ recipe, isClickable = true }: RecipeCardProps) => {
               {recipe.complexity}
             </p>
             <p className="text-[11px] font-normal text-black">
-              Рейтинг: {recipe.averageRating}
+              Голосов: {data?.voteCount ? data.voteCount : "0"}
             </p>
           </div>
         </div>

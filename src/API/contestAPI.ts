@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { API_ROUTES, BASE_URL } from "../utils/routesNames";
 import { baseQuery } from "@/API/baseQuery";
-import { Contest } from "@/types/contestTypes";
+import { Contest, ContestForm, Vote } from "@/types/contestTypes";
 
 export const contestApi = createApi({
   reducerPath: "contestApi",
@@ -41,8 +41,37 @@ export const contestApi = createApi({
       }),
       invalidatesTags: ["Contests"],
     }),
+    createContest: builder.mutation<Contest, ContestForm>({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.CONTEST.BASE}`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Contests"],
+    }),
+    getContestById: builder.query<Contest, string>({
+      query: (id) => ({
+        url: `${BASE_URL}${API_ROUTES.CONTEST.BASE}/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Contests"],
+    }),
+    getRecipeVotes: builder.query<Vote, string>({
+      query: (id) => ({
+        url: `${BASE_URL}${API_ROUTES.CONTEST.BASE}/vote/${id}`,
+        method: "GET",
+      }),
+      providesTags: ["Contests"],
+    }),
   }),
 });
 
-export const { useGetActiveContestsQuery, useGetInActiveContestsQuery } =
-  contestApi;
+export const {
+  useGetActiveContestsQuery,
+  useGetInActiveContestsQuery,
+  useAddRecipeToContestMutation,
+  useAddVoteMutation,
+  useCreateContestMutation,
+  useGetContestByIdQuery,
+  useGetRecipeVotesQuery,
+} = contestApi;

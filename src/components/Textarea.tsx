@@ -46,7 +46,7 @@ export const Textarea = <T extends FieldValues>({
         placeholder={placeholder}
         rows={rows}
         {...(register && name ? register(name, validation) : {})}
-        className={`px-1 border-[1px] border-[#D9D9D9] rounded-[${rounded}px] px-3 placeholder:text-sm placeholder:text-gray-400 placeholder:text-left`}
+        className={`border-[1px] border-[#D9D9D9] rounded-[${rounded}px] px-3 placeholder:text-sm placeholder:text-gray-400 placeholder:text-left`}
         style={{
           width: `${width}px`,
           minHeight: `${height}px`,

@@ -1,4 +1,5 @@
 import {
+  FieldErrors,
   FieldValues,
   Path,
   RegisterOptions,
@@ -9,6 +10,7 @@ interface SelectInputProps<T extends FieldValues> {
   name?: Path<T>;
   register?: UseFormRegister<T>;
   validation?: RegisterOptions<T, Path<T>>;
+  errors?: FieldErrors<T>;
   options: { id: string; name: string }[];
   label: string;
   width?: string;
@@ -22,12 +24,14 @@ export const SelectInput = <T extends FieldValues>({
   name,
   register,
   validation,
+  errors,
   options,
   width = "339",
   height = "44",
   rounded = "12",
   textSize = "20",
 }: SelectInputProps<T>) => {
+  const errorMessage = name && (errors?.[name]?.message as string);
   return (
     <div className="flex flex-col items-start">
       <p
@@ -53,6 +57,9 @@ export const SelectInput = <T extends FieldValues>({
             {option.name}
           </option>
         ))}
+        {errorMessage && (
+          <p className="text-red-500 text-sm mt-1">{errorMessage}</p>
+        )}
       </select>
     </div>
   );

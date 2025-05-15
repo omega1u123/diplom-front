@@ -46,7 +46,7 @@ export const Input = <T extends FieldValues>({
         type={inputType}
         placeholder={placeholder}
         {...(register && name ? register(name, validation) : {})}
-        className={`flex justify-start px-1 border-[1px] border-[#D9D9D9] rounded-[${rounded}px] placeholder:text-sm placeholder:text-gray-400`}
+        className={`flex justify-start px-3 border-[1px] border-[#D9D9D9] rounded-[${rounded}px] placeholder:text-sm placeholder:text-gray-400`}
         style={{ width: `${width}px`, height: `${height}px` }}
       />
       {errorMessage && (

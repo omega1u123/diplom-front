@@ -14,9 +14,10 @@ export interface Contest {
   startDate: string;
   endDate: string;
   dietaryRestrictionList: DietaryRestriction[];
-  cuisine: Cuisine[];
+  cuisine: Cuisine;
   recipeList: Recipe[];
   voteList: Vote[];
+  participantsCount: number;
   isActive: boolean;
 }
 
@@ -25,9 +26,6 @@ export interface ContestForm {
   description: string;
   startDate: string;
   endDate: string;
-  dietaryRestrictionList: DietaryRestriction[];
-  cuisine: Cuisine[];
-  recipeList: Recipe[];
-  voteList: Vote[];
-  isActive: boolean;
+  dietaryRestrictionIdList: string[];
+  cuisineId: string[];
 }

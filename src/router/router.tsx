@@ -22,6 +22,10 @@ import ProfileAchievementsPage from "@/pages/main/Profile/subpages/ProfileAchiev
 import ContestsPage from "@/pages/main/Contests/ContestsPage";
 import ActiveContestsPage from "@/pages/main/Contests/subpages/ActiveContestsPage";
 import ProfilePaidRecipePage from "@/pages/main/Profile/subpages/ProfilePaidRecipePage";
+import NonActiveContestsPage from "@/pages/main/Contests/subpages/NonActiveContestsPage";
+import CreateContestPage from "@/pages/main/Contests/subpages/CreateContestPage";
+import ContestPage from "@/pages/main/Contests/subpages/ContestPage";
+import { ContestRecipePage } from "@/pages/main/Contests/subpages/ContestRecipePage";
 
 const router = createBrowserRouter([
   {
@@ -39,10 +43,7 @@ const router = createBrowserRouter([
         path: "",
         element: <ProtectedRoute />,
         children: [
-          {
-            index: true,
-            element: <Navigate to="/recipes" replace />,
-          },
+          { index: true, element: <Navigate to="/recipes" replace /> },
           {
             path: "/",
             element: <MainPage />,
@@ -51,39 +52,20 @@ const router = createBrowserRouter([
                 path: routesNames.recipesPath,
                 element: <RecipesPage />,
                 children: [
-                  {
-                    index: true,
-                    element: <ShowRecipesPage />,
-                  },
-                  {
-                    path: "create",
-                    element: <CreateRecipePage />,
-                  },
-                  {
-                    path: ":id",
-                    element: <RecipePage />,
-                  },
+                  { index: true, element: <ShowRecipesPage /> },
+                  { path: "create", element: <CreateRecipePage /> },
+                  { path: ":id", element: <RecipePage /> },
                 ],
               },
               {
                 path: routesNames.postsPath,
                 element: <PostsPage />,
-                children: [
-                  {
-                    index: true,
-                    element: <ShowPostPage />,
-                  },
-                ],
+                children: [{ index: true, element: <ShowPostPage /> }],
               },
               {
                 path: routesNames.ratingPath,
                 element: <RatingPage />,
-                children: [
-                  {
-                    index: true,
-                    element: <ShowRatingPage />,
-                  },
-                ],
+                children: [{ index: true, element: <ShowRatingPage /> }],
               },
               {
                 path: routesNames.profilePath,
@@ -125,6 +107,13 @@ const router = createBrowserRouter([
                 children: [
                   { index: true, element: <Navigate to="active" replace /> },
                   { path: "active", element: <ActiveContestsPage /> },
+                  { path: "not-active", element: <NonActiveContestsPage /> },
+                  { path: "create", element: <CreateContestPage /> },
+                  { path: ":id", element: <ContestPage /> },
+                  {
+                    path: ":contestId/recipe/:recipeId",
+                    element: <ContestRecipePage />,
+                  },
                 ],
               },
             ],
