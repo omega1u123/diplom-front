@@ -63,6 +63,17 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Users"],
     }),
+    getPaidSub: builder.mutation<
+      void,
+      { subscriberId: string; targetUserId: string }
+    >({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.USER.BASE}/paidSubscribe`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Users"],
+    }),
     getUnSub: builder.mutation<
       void,
       { subscriberId: string; targetUserId: string }
@@ -106,6 +117,7 @@ export const {
   useGetIsSubQuery,
   useGetIsPaidSubQuery,
   useGetSubMutation,
+  useGetPaidSubMutation,
   useGetUnSubMutation,
   useCreateServiceMutation,
   useGetServicesByUserIdQuery,

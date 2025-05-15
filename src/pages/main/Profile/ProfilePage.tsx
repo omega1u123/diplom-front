@@ -1,6 +1,7 @@
 import {
   useGetIsPaidSubQuery,
   useGetIsSubQuery,
+  useGetPaidSubMutation,
   useGetServicesByUserIdQuery,
   useGetSubMutation,
   useGetUnSubMutation,
@@ -36,6 +37,7 @@ export default function ProfilePage() {
   );
   console.log(isPaidSub + "paid");
   const { data: Services } = useGetServicesByUserIdQuery(id!);
+  const [paidSub] = useGetPaidSubMutation();
   const [sub] = useGetSubMutation();
   const [unsub] = useGetUnSubMutation();
 
@@ -53,6 +55,21 @@ export default function ProfilePage() {
       } else {
         try {
           await sub({
+            subscriberId: userId,
+            targetUserId: id,
+          });
+        } catch {
+          return;
+        }
+      }
+    }
+  };
+
+  const handlePaidSub = async () => {
+    if (id) {
+      if (!isPaidSub?.isSubscribed) {
+        try {
+          await paidSub({
             subscriberId: userId,
             targetUserId: id,
           });
@@ -113,12 +130,24 @@ export default function ProfilePage() {
                     {data?.role === UserRole.User ? "" : "Услуги"}
                   </button>
                 ) : (
-                  <button
-                    onClick={handleSub}
-                    className="flex justify-center items-center w-[161px] h-10 rounded-xl bg-gray-200 cursor-pointer hover:bg-gray-300 text-xl font-normal text-black"
-                  >
-                    {isSub?.isSubscribed ? "Подписан" : "Подписаться"}
-                  </button>
+                  <div className="flex gap-2.5">
+                    <button
+                      onClick={handleSub}
+                      className="flex justify-center items-center px-2.5 h-10 rounded-xl bg-gray-200 cursor-pointer hover:bg-gray-300 text-xl font-normal text-black"
+                    >
+                      {isSub?.isSubscribed
+                        ? "Перестать отслеживать"
+                        : "Отслеживать"}
+                    </button>
+                    <button
+                      onClick={handlePaidSub}
+                      className="flex justify-center items-center px-2.5 h-10 rounded-xl bg-gray-200 cursor-pointer hover:bg-gray-300 text-xl font-normal text-black"
+                    >
+                      {isPaidSub?.isSubscribed
+                        ? "Платно подписан"
+                        : "Платно подписаться"}
+                    </button>
+                  </div>
                 )}
                 <div>
                   {Services?.map((x) => (

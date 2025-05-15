@@ -50,6 +50,7 @@ export const ServiceModal = forwardRef<HTMLDialogElement, ServiceModalProps>(
           ) {
             ref.current.close();
             setService(null);
+            setIsStepTwo(false);
           }
         }}
       >
@@ -58,6 +59,7 @@ export const ServiceModal = forwardRef<HTMLDialogElement, ServiceModalProps>(
           onClick={() => {
             if (ref && "current" in ref && ref.current) {
               ref.current.close();
+              setIsStepTwo(false);
             }
           }}
           className="cursor-pointer absolute top-0.5 right-2 text-gray-500 hover:text-gray-700"
@@ -110,6 +112,7 @@ export const ServiceModal = forwardRef<HTMLDialogElement, ServiceModalProps>(
                 onClick={() => {
                   if (ref && "current" in ref && ref.current) {
                     ref.current.close();
+                    setIsStepTwo(false);
                     reset();
                   }
                 }}
