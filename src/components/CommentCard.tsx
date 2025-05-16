@@ -27,7 +27,6 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
           className="w-[73px] h-[73px] rounded-xl cursor-pointer"
         />
       )}
-      <img src={comment.fileUrl} alt="" className="size-[73px] rounded-xl" />
       <div className="flex flex-col items-start gap-1 justify-center">
         <h3 className="text-base font-normal text-black">{comment.name}</h3>
         <p className="text-[13px] font-normal text-black">{comment.text}</p>
