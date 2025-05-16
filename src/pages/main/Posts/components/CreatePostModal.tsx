@@ -75,7 +75,7 @@ export const CreatePostModal = forwardRef<HTMLDialogElement>((_, ref) => {
               ref.current.close();
             }
           }}
-          className="cursor-pointer absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+          className="text-2xl cursor-pointer absolute -top-1 right-1 text-gray-500 hover:text-gray-700"
         >
           &times;
         </button>

@@ -1,7 +1,12 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { baseQuery } from "@/API/baseQuery";
 import { API_ROUTES, BASE_URL } from "@/utils/routesNames";
-import { Recipe, IRecipeFilter, RecipeForm } from "@/types/recipeTypes";
+import {
+  Recipe,
+  IRecipeFilter,
+  RecipeForm,
+  RecipeRateForm,
+} from "@/types/recipeTypes";
 
 export const recipeApi = createApi({
   reducerPath: "recipeApi",
@@ -29,6 +34,7 @@ export const recipeApi = createApi({
         url: `${BASE_URL}${API_ROUTES.RECIPE.BASE}/${id}`,
         method: "GET",
       }),
+      providesTags: ["Recipes"],
     }),
     saveRecipe: builder.mutation<Recipe, { recipeId: string; userId: string }>({
       query: (data) => ({
@@ -59,6 +65,14 @@ export const recipeApi = createApi({
       }),
       providesTags: ["Recipes"],
     }),
+    rateRecipe: builder.mutation<void, RecipeRateForm>({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.RECIPE.BASE}/rate`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Recipes"],
+    }),
   }),
 });
 
@@ -69,5 +83,6 @@ export const {
   useGetSavedRecipesByUserIdQuery,
   useGetPublicRecipesByUserIdQuery,
   useGetPrivateRecipesByUserIdQuery,
+  useRateRecipeMutation,
   useSaveRecipeMutation,
 } = recipeApi;

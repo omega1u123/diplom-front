@@ -22,11 +22,13 @@ const RegisterForm = () => {
         <button
           type="submit"
           form="auth-form"
-          className="w-3xs h-11 border-[1px] cursor-pointer"
+          className="w-3xs h-11 border-[1px] cursor-pointer hover:bg-gray-100"
         >
           Нажми меня
         </button>
-        <Link to={"/auth/login"}>Уже зарегистрированы?</Link>
+        <Link to={"/auth/login"} className="text-sm">
+          Уже зарегистрированы? Авторизоваться
+        </Link>
       </div>
     </div>
   );

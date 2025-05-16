@@ -32,7 +32,7 @@ export const PostCard = ({
   };
 
   return (
-    <div className="flex flex-col justify-start items-center w-[683px] min-h-[582px] px-3 py-4 gap-8 bg-gray-200 rounded-xl ">
+    <div className="flex flex-col justify-start items-center w-[683px] px-3 py-4 gap-8 bg-gray-200 rounded-xl ">
       <div className="flex justify-between items-center w-full">
         <div className="flex gap-2.5">
           <img

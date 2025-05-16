@@ -53,7 +53,7 @@ export interface User {
 }
 
 export interface UserRating {
-  imgUrl: string;
+  fileUrl: string;
   userId: string;
   userName: string;
   averageRating: number;

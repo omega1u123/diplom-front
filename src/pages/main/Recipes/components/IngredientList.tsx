@@ -15,20 +15,23 @@ export const IngredientList = ({
   const [formMenu, setFormMenu] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(0);
+  const [unit, setUnit] = useState<string>("");
   const [create] = useCreateIngredientMutation();
 
   const handleCreate = async () => {
-    const newIngredient = await create({ name, quantity }).unwrap();
+    const newIngredient = await create({ name, quantity, unit }).unwrap();
     setFormMenu(false);
     setIngredients((prev) => [...(prev || []), newIngredient]);
     setName("");
     setQuantity(0);
+    setUnit("");
   };
 
   const handleExit = () => {
     setFormMenu(false);
     setName("");
     setQuantity(0);
+    setUnit("");
   };
 
   return (
@@ -38,7 +41,7 @@ export const IngredientList = ({
         ? ingredients.map((ingredient, index) => (
             <div key={index} className="flex justify-start items-center gap-1">
               <p>{`${index + 1}. `}</p>
-              <p>{`${ingredient.name}, ${ingredient.quantity}`}</p>
+              <p>{`${ingredient.name}, ${ingredient.quantity} ${ingredient.unit}`}</p>
             </div>
           ))
         : ""}
@@ -59,6 +62,13 @@ export const IngredientList = ({
             }}
             type="number"
             placeholder="Количество"
+            className="text-sm w-28 h-6 px-1 border-[1px] border-[#D9D9D9] rounded-[8px] placeholder:text-sm"
+          />
+          <input
+            value={unit}
+            onChange={(e) => setUnit(e.target.value)}
+            type="text"
+            placeholder="Ед. измерения"
             className="text-sm w-28 h-6 px-1 border-[1px] border-[#D9D9D9] rounded-[8px] placeholder:text-sm"
           />
           <button

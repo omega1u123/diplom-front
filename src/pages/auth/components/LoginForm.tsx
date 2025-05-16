@@ -19,11 +19,13 @@ const LoginForm = () => {
         <button
           type="submit"
           form="auth-form"
-          className="w-3xs h-11 border-[1px] cursor-pointer"
+          className="w-3xs h-11 border-[1px] cursor-pointer hover:bg-gray-100"
         >
-          Нажми меня
+          Войти
         </button>
-        <Link to={"/auth/register"}>Зарегистрироваться</Link>
+        <Link to={"/auth/register"} className="text-sm">
+          Нет аккаунта? Зарегистрироваться
+        </Link>
       </div>
     </div>
   );

@@ -89,7 +89,7 @@ export default function CreateRecipePage() {
         className="flex flex-col justify-center items-center h-full w-full gap-[34px]"
       >
         <div className="flex justify-center gap-[34px]">
-          <div className="flex justify-center items-center w-[767px] bg-gray-300">
+          <div className="flex justify-center items-center w-[767px] h-[773px] bg-gray-300">
             <ImageUpload
               onImageSelect={handleImageSelect}
               preview={previewUrl}
@@ -101,7 +101,6 @@ export default function CreateRecipePage() {
               register={register}
               label={"Название"}
             />
-
             <div className="flex flex-col items-start">
               <p
                 className="font-normal text-black"
@@ -187,7 +186,7 @@ export default function CreateRecipePage() {
                 className="font-normal text-black"
                 style={{ fontSize: `20px` }}
               >
-                Платный?
+                Доступ
               </p>
               <select
                 {...register("isPublic")}

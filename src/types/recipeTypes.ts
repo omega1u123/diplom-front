@@ -1,5 +1,11 @@
 import { User } from "@/types/userTypes";
 
+export interface RecipeRateForm {
+  recipeId: string;
+  userId: string;
+  value: number;
+}
+
 export enum ComplexityEnum {
   Easy = "0",
   Medium = "1",
@@ -63,11 +69,13 @@ export interface Ingredient {
   id: string;
   name: string;
   quantity: number;
+  unit: string;
 }
 
 export interface IngredientForm {
   name: string;
   quantity: number;
+  unit: string;
 }
 
 export interface RecipeStep {

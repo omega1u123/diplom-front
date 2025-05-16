@@ -1,4 +1,5 @@
-import { Recipe } from "@/types/recipeTypes";
+import { RatingStars } from "@/components/RatingStars";
+import { ComplexityEnum, Recipe } from "@/types/recipeTypes";
 import { useNavigate } from "react-router-dom";
 
 interface RecipeCardProps {
@@ -23,7 +24,7 @@ export const RecipeCard = ({ recipe, isClickable = true }: RecipeCardProps) => {
           <img src={recipe.fileUrl} alt="" className="w-full h-full" />
         </div>
         <div className="flex justify-between">
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-2.5">
             <div className="text-xl font-normal text-black">{recipe.name}</div>
             <div className="grid grid-cols-2">
               {recipe.dietaryRestrictionList.map((restriction) => (
@@ -36,16 +37,18 @@ export const RecipeCard = ({ recipe, isClickable = true }: RecipeCardProps) => {
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-3.5">
+          <div className="flex flex-col gap-3.5 pr-4">
             <p className="text-[11px] font-normal text-black">
-              {recipe.cuisine.name}
+              {recipe.cuisine.name} кухня
             </p>
             <p className="text-[11px] font-normal text-black">
-              {recipe.complexity}
+              {recipe.complexity === ComplexityEnum.Easy
+                ? "Легкий"
+                : recipe.complexity === ComplexityEnum.Hard
+                ? "Сложный"
+                : "Средний"}
             </p>
-            <p className="text-[11px] font-normal text-black">
-              Рейтинг: {recipe.averageRating}
-            </p>
+            <RatingStars rating={recipe.averageRating} />
           </div>
         </div>
       </div>
