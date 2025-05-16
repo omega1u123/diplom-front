@@ -133,7 +133,7 @@ export default function RecipePage() {
         <div className="flex flex-col gap-2 justify-start items-start w-[1272px] py-3 px-4 rounded-[12px] bg-gray-200">
           <div>
             <h2 className="text-2xl font-normal text-black">Описание:</h2>
-            <p className="w-[1236px] text-xl font-normal text-black">
+            <p className="max-w-[1236px] text-xl font-normal text-black text-wrap break-words">
               {data?.description}
             </p>
           </div>
