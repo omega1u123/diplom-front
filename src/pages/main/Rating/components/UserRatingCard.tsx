@@ -39,7 +39,7 @@ export const UserRatingCard = ({ user }: UserRatingCardProps) => {
       </div>
       <div className="flex flex-col justify-center items-start">
         <p className="text-xs text-gray-200 font-normal">
-          Рейтинг: {user.averageRating} кухня
+          Рейтинг: {user.averageRating}
         </p>
         <p className="text-xs text-gray-200 font-normal">
           Цел. кухня: {user.cuisine.name}
