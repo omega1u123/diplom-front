@@ -39,14 +39,11 @@ export const InteractiveRatingStars = ({
 
     return (
       <>
-        {/* Empty background */}
         <img
           src={starIcon}
           alt="Empty"
           className="absolute w-6 h-6 inset-0 opacity-30 grayscale"
         />
-
-        {/* Conditional overlay */}
         {isFull && (
           <img
             src={starIcon}
@@ -74,33 +71,26 @@ export const InteractiveRatingStars = ({
       <div className="flex items-center relative cursor-pointer">
         {Array.from({ length: 5 }).map((_, index) => (
           <div key={index} className="relative w-6 h-6 mx-0.5">
-            {/* Left Half */}
             <div
               className="absolute left-0 top-0 w-1/2 h-full z-20"
               onMouseEnter={() => handleMouseEnter(index, true)}
             >
-              {/* Tooltip for left half */}
               {hoverRating === index + 0.5 && (
                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded pointer-events-none transition-opacity opacity-100">
                   {(index + 0.5).toFixed(1)}
                 </div>
               )}
             </div>
-
-            {/* Right Half */}
             <div
               className="absolute right-0 top-0 w-1/2 h-full z-20"
               onMouseEnter={() => handleMouseEnter(index, false)}
             >
-              {/* Tooltip for right half */}
               {hoverRating === index + 1 && (
                 <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded pointer-events-none transition-opacity opacity-100">
                   {(index + 1).toFixed(1)}
                 </div>
               )}
             </div>
-
-            {/* Star visuals */}
             <div className="relative w-6 h-6">{renderStarForIndex(index)}</div>
           </div>
         ))}
