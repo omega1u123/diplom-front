@@ -40,10 +40,10 @@ export default function CreateContestPage() {
         cuisineId,
       });
       console.log(contest);
-      navigate("/contests", { replace: true });
     } catch {
       return;
     }
+    navigate("/contests", { replace: true });
   };
 
   return (
