@@ -10,10 +10,11 @@ import { useAppSelector } from "@/hooks/reduxHooks";
 import { CommentForm } from "@/types/commentTypes";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const ContestRecipePage = () => {
   const userId = useAppSelector((state) => state.auth.userId);
+  const navigate = useNavigate();
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const { contestId, recipeId } = useParams();
   const { data } = useGetRecipeByIdQuery(recipeId!);
@@ -62,7 +63,17 @@ export const ContestRecipePage = () => {
             <div className="flex gap-10">
               <div className="flex flex-col gap-3 text-xl font-normal text-black">
                 <p>Название: {data?.name}</p>
-                <p>Автор: {data?.user.name}</p>
+                <p>
+                  Автор:{" "}
+                  <span
+                    onClick={() => {
+                      navigate(`/profile/${data?.user.id}`);
+                    }}
+                    className="cursor-pointer"
+                  >
+                    {data?.user.name}
+                  </span>
+                </p>
                 <p>Сложность: {data?.complexity}</p>
                 <p>Рейтинг: {data?.averageRating}</p>
                 <div className="flex flex-wrap gap-2">

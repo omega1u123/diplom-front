@@ -16,10 +16,11 @@ import { CommentForm } from "@/types/commentTypes";
 import { ComplexityEnum } from "@/types/recipeTypes";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function RecipePage() {
   const userId = useAppSelector((state) => state.auth.userId);
+  const navigate = useNavigate();
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const { id } = useParams();
   const { data } = useGetRecipeByIdQuery(id!);
@@ -72,7 +73,17 @@ export default function RecipePage() {
             <div className="flex gap-10">
               <div className="flex flex-col gap-5 text-xl font-normal text-black">
                 <p>Название: {data?.name}</p>
-                <p>Автор: {data?.user.name}</p>
+                <p>
+                  Автор:{" "}
+                  <span
+                    onClick={() => {
+                      navigate(`/profile/${data?.user.id}`);
+                    }}
+                    className="cursor-pointer"
+                  >
+                    {data?.user.name}
+                  </span>
+                </p>
                 <p>
                   Сложность:{" "}
                   {data?.complexity === ComplexityEnum.Easy

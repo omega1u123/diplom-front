@@ -6,6 +6,7 @@ import {
   PaidServiceForm,
   User,
   UserRatingResponse,
+  UserUpdate,
 } from "@/types/userTypes";
 import { API_ROUTES, BASE_URL } from "@/utils/routesNames";
 
@@ -108,6 +109,14 @@ export const userApi = createApi({
       }),
       invalidatesTags: ["Orders"],
     }),
+    updateUser: builder.mutation<User, UserUpdate>({
+      query: (data) => ({
+        url: `${BASE_URL}${API_ROUTES.USER.BASE}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Users"],
+    }),
   }),
 });
 
@@ -122,4 +131,5 @@ export const {
   useCreateServiceMutation,
   useGetServicesByUserIdQuery,
   useCreateOrderMutation,
+  useUpdateUserMutation,
 } = userApi;

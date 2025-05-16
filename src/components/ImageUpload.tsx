@@ -3,24 +3,21 @@ import { ChangeEvent } from "react";
 interface ImageUploadProps {
   onImageSelect: (file: File | null, previewUrl: string | null) => void;
   preview: string | null;
+  text?: string;
 }
 
-export const ImageUpload = ({ onImageSelect, preview }: ImageUploadProps) => {
-  // const [file, setFile] = useState<File | null>(null);
-  // const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-
+export const ImageUpload = ({
+  onImageSelect,
+  preview,
+  text = "Нажмите или закиньте фотографию",
+}: ImageUploadProps) => {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
       const selectedFile = files[0];
       const imageUrl = URL.createObjectURL(selectedFile);
-
-      // setFile(selectedFile);
-      // setPreviewUrl(imageUrl);
       onImageSelect(selectedFile, imageUrl);
     } else {
-      // setFile(null);
-      // setPreviewUrl(null);
       onImageSelect(null, null);
     }
   };
@@ -45,7 +42,7 @@ export const ImageUpload = ({ onImageSelect, preview }: ImageUploadProps) => {
             className="object-cover w-full h-full"
           />
         ) : (
-          <p className="text-gray-500">Нажмите или закиньте фотографию</p>
+          <p className="text-gray-500">{text}</p>
         )}
       </label>
     </div>

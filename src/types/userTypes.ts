@@ -52,6 +52,12 @@ export interface User {
   fileUrl: string;
 }
 
+export interface UserUpdate {
+  userId: string;
+  name: string;
+  fileUrl: string;
+}
+
 export interface UserRating {
   fileUrl: string;
   userId: string;
