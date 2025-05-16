@@ -45,7 +45,7 @@ export const SelectInput = <T extends FieldValues>({
         className={`flex justify-start px-1 border-[1px] border-[#D9D9D9] rounded-[${rounded}px]`}
         style={{ width: `${width}px`, height: `${height}px` }}
       >
-        <option key="none" value="null">
+        <option key="none" value="">
           Выберите опцию
         </option>
         {options.map((option) => (

@@ -38,12 +38,12 @@ export default function CreateContestPage() {
         endDate: endDate.slice(0, 10),
         dietaryRestrictionIdList: dietaryRestrictionId,
         cuisineId,
-      });
+      }).unwrap();
       console.log(contest);
     } catch {
       return;
     }
-    navigate("/contests", { replace: true });
+    navigate("/contests");
   };
 
   return (
@@ -89,6 +89,9 @@ export default function CreateContestPage() {
       <SelectInput<ContestForm>
         name="cuisineId"
         register={register}
+        validation={{
+          setValueAs: (value) => (value === "" ? null : value),
+        }}
         errors={errors}
         label={"Тип кухни"}
         options={cuisineList ?? []}
