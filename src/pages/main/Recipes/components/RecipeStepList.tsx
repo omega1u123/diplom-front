@@ -37,14 +37,12 @@ export const RecipeStepList = ({
   return (
     <div className="flex flex-col gap-1">
       <p>Шаги:</p>
-      {recipeSteps
-        ? recipeSteps.map((recipe, index) => (
-            <div key={index} className="flex justify-start items-center gap-1">
-              <p>{`${stepNumber}. `}</p>
-              <p>{`${recipe.description}`}</p>
-            </div>
-          ))
-        : ""}
+      {recipeSteps?.map((step, index) => (
+        <div key={step.id} className="flex justify-start items-center gap-1">
+          <p>{`${index + 1}. `}</p>
+          <p>{step.description}</p>
+        </div>
+      ))}
       {formMenu && (
         <div className="flex justify-start items-center gap-0.5">
           <input

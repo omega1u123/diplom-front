@@ -148,13 +148,14 @@ export default function RecipePage() {
           </div>
           <div>
             <h2 className="text-2xl font-normal text-black">Шаги:</h2>
-            {data?.recipeStepList
-              .sort((a, b) => a.stepNumber - b.stepNumber)
-              .map((x) => (
-                <p key={x.id} className="text-xl font-normal text-black">
-                  {x.stepNumber}. {x.description}
-                </p>
-              ))}
+            {data?.recipeStepList &&
+              [...data.recipeStepList]
+                .sort((a, b) => a.stepNumber - b.stepNumber)
+                .map((x) => (
+                  <p key={x.id} className="text-xl font-normal text-black">
+                    {x.stepNumber}. {x.description}
+                  </p>
+                ))}
           </div>
         </div>
         <div className="flex flex-col gap-2 justify-start items-start w-[1272px]  py-3 px-4 rounded-[12px] bg-gray-200">

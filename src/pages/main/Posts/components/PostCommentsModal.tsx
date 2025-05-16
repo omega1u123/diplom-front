@@ -112,7 +112,7 @@ export const PostCommentsModal = forwardRef<
           )}
         </form>
         {data?.map((x) => (
-          <CommentCard comment={x} />
+          <CommentCard key={x.id} comment={x} />
         ))}
       </div>
     </dialog>
