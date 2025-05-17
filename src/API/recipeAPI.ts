@@ -73,6 +73,13 @@ export const recipeApi = createApi({
       }),
       invalidatesTags: ["Recipes"],
     }),
+    deleteRecipe: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `${BASE_URL}${API_ROUTES.RECIPE.BASE}/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Recipes"],
+    }),
   }),
 });
 
@@ -85,4 +92,5 @@ export const {
   useGetPrivateRecipesByUserIdQuery,
   useRateRecipeMutation,
   useSaveRecipeMutation,
+  useDeleteRecipeMutation,
 } = recipeApi;

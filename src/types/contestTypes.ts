@@ -29,3 +29,10 @@ export interface ContestForm {
   dietaryRestrictionIdList: string[];
   cuisineId: string[];
 }
+
+export interface Winner {
+  userId: string;
+  name: string;
+  fileUrl: string;
+  recipeId: string;
+}

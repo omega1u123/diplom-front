@@ -18,7 +18,7 @@ export default function ShowRatingPage() {
         UserRatings.map((user, index) => (
           <div
             key={user.userId}
-            className="flex justify-between items-start gap-8"
+            className="flex justify-between items-center gap-8"
           >
             <div className="text-2xl font-normal text-black">{index + 1}.</div>
             <UserRatingCard user={user} />

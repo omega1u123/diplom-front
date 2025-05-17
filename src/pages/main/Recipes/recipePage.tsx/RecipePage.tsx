@@ -3,6 +3,7 @@ import {
   usePostCommentMutation,
 } from "@/API/commentAPI";
 import {
+  useDeleteRecipeMutation,
   useGetRecipeByIdQuery,
   useRateRecipeMutation,
   useSaveRecipeMutation,
@@ -28,6 +29,7 @@ export default function RecipePage() {
   const { register, handleSubmit, reset } = useForm<CommentForm>();
   const [create] = usePostCommentMutation();
   const [rate] = useRateRecipeMutation();
+  const [remove] = useDeleteRecipeMutation();
   const { data: comments } = useGetRecipeCommentsQuery(
     { recipeId: id! },
     { skip: !id }
@@ -60,6 +62,17 @@ export default function RecipePage() {
       } catch {
         return;
       }
+    }
+  };
+
+  const handleDelete = async () => {
+    if (id) {
+      try {
+        await remove(id);
+      } catch {
+        return;
+      }
+      navigate("/recipes");
     }
   };
   return (
@@ -115,7 +128,15 @@ export default function RecipePage() {
               </div>
             </div>
             {userId === data?.user.id ? (
-              ""
+              <div className="flex justify-between items-center w-full">
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  className="flex justify-center items-center w-36 h-9 rounded-xl bg-red-500 text-xl font-normal text-white cursor-pointer hover:bg-red-600"
+                >
+                  Удалить
+                </button>
+              </div>
             ) : (
               <div className="flex justify-between items-center w-full">
                 <button
@@ -142,7 +163,7 @@ export default function RecipePage() {
             <h2 className="text-2xl font-normal text-black">Ингредиенты:</h2>
             {data?.ingredientList.map((x, index) => (
               <p key={x.id} className="text-xl font-normal text-black">
-                {index + 1}. {x.name}, {x.quantity}
+                {index + 1}. {x.name}, {x.quantity}, {x.unit}
               </p>
             ))}
           </div>

@@ -39,7 +39,10 @@ export const IngredientList = ({
       <p>Ингредиенты:</p>
       {ingredients
         ? ingredients.map((ingredient, index) => (
-            <div key={index} className="flex justify-start items-center gap-1">
+            <div
+              key={ingredient.id}
+              className="flex justify-start items-center gap-1"
+            >
               <p>{`${index + 1}. `}</p>
               <p>{`${ingredient.name}, ${ingredient.quantity} ${ingredient.unit}`}</p>
             </div>

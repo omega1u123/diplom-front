@@ -34,14 +34,14 @@ export const UserRatingCard = ({ user }: UserRatingCardProps) => {
           <h2 className="h-[29px] text-2xl text-black font-normal">
             {user.userName}
           </h2>
-          {user.isVerified && <img src={verifiedSign} alt="verified_sign" />}
+          {user.isCook && <img src={verifiedSign} alt="verified_sign" />}
         </div>
       </div>
       <div className="flex flex-col justify-center items-start">
-        <p className="text-xs text-gray-200 font-normal">
+        <p className="text-xs text-black font-normal">
           Рейтинг: {user.averageRating}
         </p>
-        <p className="text-xs text-gray-200 font-normal">
+        <p className="text-xs text-black font-normal">
           Цел. кухня: {user.cuisine.name}
         </p>
       </div>

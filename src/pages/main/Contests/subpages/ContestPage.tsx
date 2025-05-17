@@ -1,18 +1,36 @@
-import { useGetContestByIdQuery } from "@/API/contestAPI";
+import { useGetContestByIdQuery, useGetWinnerQuery } from "@/API/contestAPI";
 import { ContestRecipeCard } from "@/pages/main/Contests/components/ContestRecipeCard";
 import { ContestRecipeModal } from "@/pages/main/Contests/components/ContestRecipeModal";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 export default function ContestPage() {
   const { id } = useParams();
   const { data, isLoading } = useGetContestByIdQuery(id!);
+  const { data: Winner } = useGetWinnerQuery(id!);
   const registerRecipeRef = useRef<HTMLDialogElement>(null);
   const openRegisterRecipeModal = () => {
     if (registerRecipeRef.current && !registerRecipeRef.current.open) {
       registerRecipeRef.current.showModal();
     }
   };
+
+  const sortedRecipes = useMemo(() => {
+    if (!data?.recipeList) return [];
+
+    const recipeList = [...data.recipeList]; // Clone original list
+    if (Winner?.recipeId) {
+      const winnerIndex = recipeList.findIndex(
+        (recipe) => recipe.id === Winner.recipeId
+      );
+
+      if (winnerIndex > -1) {
+        const [winnerRecipe] = recipeList.splice(winnerIndex, 1);
+        return [winnerRecipe, ...recipeList]; // Winner first
+      }
+    }
+    return recipeList;
+  }, [data?.recipeList, Winner]);
   return (
     <section className="flex flex-col items-start justify-start w-[1188px] min-h-[824px] p-10 gap-5 rounded-xl bg-gray-100">
       {isLoading ? (
@@ -59,8 +77,17 @@ export default function ContestPage() {
             </button>
           </div>
           <div className="flex flex-wrap gap-5">
-            {data?.recipeList.map((x) => (
-              <ContestRecipeCard contestId={id!} recipe={x} />
+            {sortedRecipes.map((recipe) => (
+              <ContestRecipeCard
+                key={recipe.id}
+                contestId={id!}
+                recipe={recipe}
+                bg={
+                  Winner?.recipeId === recipe.id
+                    ? "bg-[#FFC107] border-2 border-yellow-800 shadow-md"
+                    : "bg-gray-200"
+                }
+              />
             ))}
           </div>
         </>

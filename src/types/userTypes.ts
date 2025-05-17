@@ -64,7 +64,7 @@ export interface UserRating {
   userName: string;
   averageRating: number;
   cuisine: Cuisine;
-  isVerified: boolean;
+  isCook: boolean;
 }
 
 export interface UserRatingResponse {

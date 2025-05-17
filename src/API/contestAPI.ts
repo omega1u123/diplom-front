@@ -1,7 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { API_ROUTES, BASE_URL } from "../utils/routesNames";
 import { baseQuery } from "@/API/baseQuery";
-import { Contest, ContestForm, Vote } from "@/types/contestTypes";
+import { Contest, ContestForm, Vote, Winner } from "@/types/contestTypes";
 
 export const contestApi = createApi({
   reducerPath: "contestApi",
@@ -63,6 +63,12 @@ export const contestApi = createApi({
       }),
       providesTags: ["Contests"],
     }),
+    getWinner: builder.query<Winner, string>({
+      query: (id) => ({
+        url: `${BASE_URL}${API_ROUTES.CONTEST.BASE}/${id}/winner`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -74,4 +80,5 @@ export const {
   useCreateContestMutation,
   useGetContestByIdQuery,
   useGetRecipeVotesQuery,
+  useGetWinnerQuery,
 } = contestApi;
