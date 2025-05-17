@@ -18,7 +18,7 @@ export default function ContestPage() {
   const sortedRecipes = useMemo(() => {
     if (!data?.recipeList) return [];
 
-    const recipeList = [...data.recipeList]; // Clone original list
+    const recipeList = [...data.recipeList];
     if (Winner?.recipeId) {
       const winnerIndex = recipeList.findIndex(
         (recipe) => recipe.id === Winner.recipeId
@@ -26,7 +26,7 @@ export default function ContestPage() {
 
       if (winnerIndex > -1) {
         const [winnerRecipe] = recipeList.splice(winnerIndex, 1);
-        return [winnerRecipe, ...recipeList]; // Winner first
+        return [winnerRecipe, ...recipeList];
       }
     }
     return recipeList;
