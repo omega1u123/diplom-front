@@ -2,23 +2,40 @@ import {
   usePostCommentMutation,
   useGetRecipeCommentsQuery,
 } from "@/API/commentAPI";
-import { useAddVoteMutation, useGetRecipeVotesQuery } from "@/API/contestAPI";
+import {
+  useAddVoteMutation,
+  useGetContestByIdQuery,
+  useGetRecipeVotesQuery,
+} from "@/API/contestAPI";
 import { useGetRecipeByIdQuery } from "@/API/recipeAPI";
 import { CommentCard } from "@/components/CommentCard";
+import { RatingStars } from "@/components/RatingStars";
 import { Textarea } from "@/components/Textarea";
 import { useAppSelector } from "@/hooks/reduxHooks";
+import { useContestExpire } from "@/hooks/useContestExpire";
 import { CommentForm } from "@/types/commentTypes";
-import { useState } from "react";
+import { ComplexityEnum } from "@/types/recipeTypes";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 
 export const ContestRecipePage = () => {
+  const [expire, setExpire] = useState<boolean>(true);
   const userId = useAppSelector((state) => state.auth.userId);
   const navigate = useNavigate();
   const [isCreate, setIsCreate] = useState<boolean>(false);
   const { contestId, recipeId } = useParams();
+  const { data: ContestData } = useGetContestByIdQuery(contestId!);
   const { data } = useGetRecipeByIdQuery(recipeId!);
   const { data: votes } = useGetRecipeVotesQuery(recipeId!);
+
+  const isExpire = useContestExpire({
+    endDate: ContestData?.endDate ?? "2024-05-20",
+  });
+
+  useEffect(() => {
+    setExpire(isExpire);
+  }, [isExpire]);
 
   const { register, handleSubmit, reset } = useForm<CommentForm>();
   const [create] = usePostCommentMutation();
@@ -42,10 +59,12 @@ export const ContestRecipePage = () => {
     }
   };
   const handleVote = async () => {
-    try {
-      await vote({ contestId: contestId!, recipeId: recipeId! });
-    } catch {
-      return;
+    if (!isExpire) {
+      try {
+        await vote({ contestId: contestId!, recipeId: recipeId! });
+      } catch {
+        return;
+      }
     }
   };
   return (
@@ -74,8 +93,18 @@ export const ContestRecipePage = () => {
                     {data?.user.name}
                   </span>
                 </p>
-                <p>Сложность: {data?.complexity}</p>
-                <p>Рейтинг: {data?.averageRating}</p>
+                <p>
+                  Сложность:{" "}
+                  {data?.complexity === ComplexityEnum.Easy
+                    ? "Легкий"
+                    : data?.complexity === ComplexityEnum.Hard
+                    ? "Сложный"
+                    : "Средний"}
+                </p>
+                <div className="flex items-center gap-4 py-1.5">
+                  <p className="pb-0.5">Рейтинг:</p>
+                  {data && <RatingStars rating={data?.averageRating} />}
+                </div>
                 <div className="flex flex-wrap gap-2">
                   <p>Диетические ограничения: </p>
                   {data?.dietaryRestrictionList.map((x) => (
@@ -94,13 +123,18 @@ export const ContestRecipePage = () => {
               </div>
             </div>
             <div className="flex w-full justify-between items-center">
-              <button
-                type="button"
-                onClick={handleVote}
-                className="flex justify-center items-center py-1 px-3 bg-blue-200 rounded-xl cursor-pointer hover:bg-blue-300"
-              >
-                Проголосовать
-              </button>
+              {expire ? (
+                ""
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleVote}
+                  className="flex justify-center items-center py-1 px-3 bg-blue-200 rounded-xl cursor-pointer hover:bg-blue-300"
+                >
+                  Проголосовать
+                </button>
+              )}
+
               <div>Голосов: {votes?.voteCount ? votes.voteCount : "0"}</div>
             </div>
           </div>

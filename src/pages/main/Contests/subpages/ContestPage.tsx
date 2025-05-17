@@ -1,13 +1,23 @@
 import { useGetContestByIdQuery, useGetWinnerQuery } from "@/API/contestAPI";
+import { useContestExpire } from "@/hooks/useContestExpire";
 import { ContestRecipeCard } from "@/pages/main/Contests/components/ContestRecipeCard";
 import { ContestRecipeModal } from "@/pages/main/Contests/components/ContestRecipeModal";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function ContestPage() {
+  const [expire, setExpire] = useState<boolean>(true);
   const { id } = useParams();
   const { data, isLoading } = useGetContestByIdQuery(id!);
   const { data: Winner } = useGetWinnerQuery(id!);
+
+  const isExpire = useContestExpire({
+    endDate: data?.endDate ?? "2024-05-20",
+  });
+
+  useEffect(() => {
+    setExpire(isExpire);
+  }, [isExpire]);
   const registerRecipeRef = useRef<HTMLDialogElement>(null);
   const openRegisterRecipeModal = () => {
     if (registerRecipeRef.current && !registerRecipeRef.current.open) {
@@ -68,13 +78,17 @@ export default function ContestPage() {
             <p className="text-2xl font-normal text-black">
               Участники: {data?.participantsCount}
             </p>
-            <button
-              type="button"
-              onClick={openRegisterRecipeModal}
-              className="flex justify-start items-start py-1 px-2.5 border border-blue-200 rounded-xl cursor-pointer hover:bg-blue-50"
-            >
-              Зарегистрировать рецепт
-            </button>
+            {expire ? (
+              ""
+            ) : (
+              <button
+                type="button"
+                onClick={openRegisterRecipeModal}
+                className="flex justify-start items-start py-1 px-2.5 border border-blue-200 rounded-xl cursor-pointer hover:bg-blue-50"
+              >
+                Зарегистрировать рецепт
+              </button>
+            )}
           </div>
           <div className="flex flex-wrap gap-5">
             {sortedRecipes.map((recipe) => (
