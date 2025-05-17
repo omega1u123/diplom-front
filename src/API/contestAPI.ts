@@ -68,6 +68,7 @@ export const contestApi = createApi({
         url: `${BASE_URL}${API_ROUTES.CONTEST.BASE}/${id}/winner`,
         method: "GET",
       }),
+      providesTags: ["Contests"],
     }),
   }),
 });
