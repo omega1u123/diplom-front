@@ -84,7 +84,7 @@ export default function ContestPage() {
                 recipe={recipe}
                 bg={
                   Winner?.recipeId === recipe.id
-                    ? "bg-[#FFC107] border-2 border-yellow-800 shadow-md"
+                    ? "bg-gradient-to-r from-yellow-400 via-yellow-400 to-yellow-500 border-2 border-yellow-900 shadow-lg"
                     : "bg-gray-200"
                 }
               />
