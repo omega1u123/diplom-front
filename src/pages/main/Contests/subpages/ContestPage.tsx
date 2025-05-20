@@ -12,12 +12,11 @@ export default function ContestPage() {
   const { data: Winner } = useGetWinnerQuery(id!, { skip: expire === false });
 
   const isExpire = useContestExpire({
-    endDate: data?.endDate ?? "2024-05-20",
+    endDate: data?.endDate ?? "3024-05-20",
   });
 
   useEffect(() => {
     setExpire(isExpire);
-    console.log(isExpire);
   }, [isExpire]);
   const registerRecipeRef = useRef<HTMLDialogElement>(null);
   const openRegisterRecipeModal = () => {
