@@ -17,6 +17,7 @@ export default function ContestPage() {
 
   useEffect(() => {
     setExpire(isExpire);
+    console.log(isExpire);
   }, [isExpire]);
   const registerRecipeRef = useRef<HTMLDialogElement>(null);
   const openRegisterRecipeModal = () => {
