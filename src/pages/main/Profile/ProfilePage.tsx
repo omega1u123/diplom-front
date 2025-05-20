@@ -12,6 +12,7 @@ import {
 import { starIcon } from "@/assets";
 import { ImageUpload } from "@/components/ImageUpload";
 import { useAppSelector } from "@/hooks/reduxHooks";
+import { useUserRole } from "@/hooks/useUserRole";
 import { CreateServiceModal } from "@/pages/main/Profile/components/CreateServiceModal";
 import { ProfileTabs } from "@/pages/main/Profile/components/ProfileTabs";
 import { ServiceCard } from "@/pages/main/Profile/components/ServiceCard";
@@ -47,6 +48,11 @@ export default function ProfilePage() {
   const [unsub] = useGetUnSubMutation();
   const [fetchMedia] = useFetchMediaMutation();
   const [update] = useUpdateUserMutation();
+
+  const userRole = useUserRole({
+    level: data?.level ?? 1,
+    role: data?.role ?? UserRole.User,
+  });
 
   const handleSub = async () => {
     if (id) {
@@ -173,7 +179,7 @@ export default function ProfilePage() {
                     {data?.subscriptionsCount} подписчиков
                   </p>
                 </div>
-                <p className="text-2xl font-normal text-black">{data?.role}</p>
+                <p className="text-2xl font-normal text-black">{userRole}</p>
                 {id === userId ? (
                   <button
                     onClick={openCreateServiceModal}

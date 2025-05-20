@@ -9,7 +9,7 @@ export default function ContestPage() {
   const [expire, setExpire] = useState<boolean>(true);
   const { id } = useParams();
   const { data, isLoading } = useGetContestByIdQuery(id!);
-  const { data: Winner } = useGetWinnerQuery(id!);
+  const { data: Winner } = useGetWinnerQuery(id!, { skip: expire === false });
 
   const isExpire = useContestExpire({
     endDate: data?.endDate ?? "2024-05-20",

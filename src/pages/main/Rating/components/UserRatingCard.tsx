@@ -37,7 +37,7 @@ export const UserRatingCard = ({ user }: UserRatingCardProps) => {
           {user.isCook && <img src={verifiedSign} alt="verified_sign" />}
         </div>
       </div>
-      <div className="flex flex-col justify-center items-start">
+      <div className="flex flex-col justify-center items-start w-[150px]">
         <p className="text-xs text-black font-normal">
           Рейтинг: {user.averageRating}
         </p>
