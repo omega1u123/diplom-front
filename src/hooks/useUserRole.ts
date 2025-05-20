@@ -1,4 +1,5 @@
 import { UserRole } from "@/types/userTypes";
+import { useEffect, useState } from "react";
 
 interface useUserRoleProps {
   level: number;
@@ -6,18 +7,27 @@ interface useUserRoleProps {
 }
 
 export const useUserRole = ({ level, role }: useUserRoleProps) => {
-  if (role === UserRole.User) {
-    switch (level) {
-      case 1:
-        return "Новичек";
-      case 2:
-        return "Любитель";
-      case 3:
-        return "Опытный";
-      case 4:
-        return "Профессионал";
+  const [newRole, setNewRole] = useState<string>("");
+  useEffect(() => {
+    if (role === UserRole.User) {
+      switch (level) {
+        case 1:
+          setNewRole("Новичек");
+          break;
+        case 2:
+          setNewRole("Любитель");
+          break;
+        case 3:
+          setNewRole("Опытный");
+          break;
+        case 4:
+          setNewRole("Профессионал");
+          break;
+      }
+    } else if (role === UserRole.Cook) {
+      setNewRole("Повар");
     }
-  } else if (role === UserRole.Cook) {
-    return "Повар";
-  }
+  }, [role, level]);
+
+  return newRole;
 };

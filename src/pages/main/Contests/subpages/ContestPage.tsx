@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function ContestPage() {
-  const [expire, setExpire] = useState<boolean>(true);
+  const [expire, setExpire] = useState<boolean>(false);
   const { id } = useParams();
   const { data, isLoading } = useGetContestByIdQuery(id!);
   const { data: Winner } = useGetWinnerQuery(id!, { skip: expire === false });
